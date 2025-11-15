@@ -1,5 +1,4 @@
 :root {
-  /* Цвета */
   --bg-main: #0B0D14;
   --bg-card: #11141E;
   --bg-secondary: #161A28;
@@ -15,11 +14,26 @@
   --success: #3CD38B;
   --error: #FF4F7D;
 
-  /* Радиусы / тени */
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
 
-  /* Интерфейс */
-  --transition-fast: 0.2s ease;
+  --transition-fast: 0.2s ease-out;
+}
+
+body.page--light {
+  --bg-main: #F5F6FB;
+  --bg-card: #FFFFFF;
+  --bg-secondary: #ECEFFF;
+
+  --accent: #7C5CFF;
+  --accent-hover: #5E45E6;
+  --accent-soft: rgba(124, 92, 255, 0.1);
+
+  --text-main: #141622;
+  --text-muted: #555A72;
+  --border: #D5D8EA;
+
+  --success: #1EAD6A;
+  --error: #E53955;
 }

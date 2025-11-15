@@ -1,23 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
+    <title>Тренажёр по булевой алгебре</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/adaptive.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 
-<body>
+<body class="page">
+    <header class="header">
+        <div class="container header__inner">
+            <div class="logo">BoolTrainer</div>
+
+            <nav class="nav">
+                <a href="index.html" class="nav__link nav__link--active">Главная</a>
+                <a href="theory.html" class="nav__link">Теория</a>
+                <a href="about.html" class="nav__link">О проекте</a>
+            </nav>
+
+            <button class="theme-toggle" type="button" id="themeToggle">
+                Светлая тема
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <section class="hero hero--main">
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="hero__eyebrow">Учебный веб-тренажёр</span>
+                    <h1 class="hero__title">Прокачай навыки булевой алгебры</h1>
+                    <p class="hero__subtitle">
+                        Интерактивный тренажёр для отработки логических выражений, таблиц
+                        истинности и базовых законов алгебры логики. Подходит для школьников,
+                        студентов и преподавателей.
+                    </p>
+
+                    <div class="hero__actions">
+                        <a href="#trainer" class="btn btn--primary">Начать тренировку</a>
+                        <a href="theory.html" class="btn btn--ghost">Посмотреть теорию</a>
+                    </div>
+
+                    <div class="hero__meta">
+                        <span class="hero-tag">Решение примеров в интерактиве</span>
+                        <span class="hero-tag">Пошаговая тренировка логики</span>
+                        <span class="hero-tag">Статистика прогресса</span>
+                    </div>
+                </div>
+
+                <div class="hero__preview">
+                    <div class="hero-card">
+                        <div class="hero-card__label">Пример выражения</div>
+                        <div class="hero-card__expr">!(A ∧ B) ∨ C</div>
+                        <div class="hero-card__hint">
+                            Ниже на странице можно подставить значения переменных и
+                            проверить результат.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="audience">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Для кого этот тренажёр</h2>
+                    <p class="section__subtitle">
+                        Проект можно использовать как образовательный инструмент на занятиях и в самостоятельной
+                        подготовке.
+                    </p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">Школьники и студенты</h3>
+                        <p class="card__text">
+                            Помогает тренировать логику перед контрольными, зачётами и экзаменами по информатике и
+                            дискретной математике.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Преподаватели</h3>
+                        <p class="card__text">
+                            Можно использовать как наглядный пример на занятиях или дополнительный интерактивный
+                            материал.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Самостоятельное обучение</h3>
+                        <p class="card__text">
+                            Удобный способ отрабатывать навыки работы с булевой алгеброй без установки отдельного
+                            программного обеспечения.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--accent" id="trainer">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Интерактивный тренажёр</h2>
+                    <p class="section__subtitle">
+                        Сейчас блок работает статично, но структура уже готова под подключение JS-логики.
+                    </p>
+                </header>
+
+                <div class="trainer">
+                    <div class="trainer__left card">
+                        <div class="trainer__expression">
+                            <span class="trainer__expression-label">Текущее выражение:</span>
+                            <span class="trainer__expression-value" id="expression">A ∨ (B ∧ ¬C)</span>
+                        </div>
+
+                        <div class="trainer__controls">
+                            <div class="trainer__row">
+                                <label class="field">
+                                    <span class="field__label">A</span>
+                                    <select class="field__control" id="varA">
+                                        <option value="">—</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </label>
+
+                                <label class="field">
+                                    <span class="field__label">B</span>
+                                    <select class="field__control" id="varB">
+                                        <option value="">—</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </label>
+
+                                <label class="field">
+                                    <span class="field__label">C</span>
+                                    <select class="field__control" id="varC">
+                                        <option value="">—</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <label class="field field--full">
+                                <span class="field__label">Результат выражения</span>
+                                <select class="field__control" id="result">
+                                    <option value="">Выбери 0 или 1</option>
+                                    <option value="0">0 — ложь</option>
+                                    <option value="1">1 — истина</option>
+                                </select>
+                            </label>
+
+                            <div class="trainer__buttons">
+                                <button class="btn btn--primary" type="button" id="checkBtn">Проверить</button>
+                                <button class="btn btn--secondary" type="button" id="nextBtn">Следующее
+                                    выражение</button>
+                            </div>
+
+                            <div class="trainer__feedback" id="feedback"></div>
+                        </div>
+                    </div>
+
+                    <aside class="trainer__right card">
+                        <h3 class="trainer__stats-title">Статистика</h3>
+                        <dl class="stats">
+                            <div class="stats__item">
+                                <dt>Всего примеров</dt>
+                                <dd id="statTotal">0</dd>
+                            </div>
+                            <div class="stats__item">
+                                <dt>Верных решений</dt>
+                                <dd id="statCorrect">0</dd>
+                            </div>
+                            <div class="stats__item">
+                                <dt>Процент верных</dt>
+                                <dd id="statPercent">0%</dd>
+                            </div>
+                        </dl>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Как устроен тренажёр</h2>
+                    <p class="section__subtitle">
+                        Структура интерфейса и логики, которую можно подробно описать в пояснительной записке.
+                    </p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">Выбор значений</h3>
+                        <p class="card__text">
+                            Пользователь выбирает значения переменных A, B, C и ожидаемый результат выражения (0 или 1).
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Проверка выражения</h3>
+                        <p class="card__text">
+                            Скрипт вычисляет значение логического выражения и сравнивает его с ответом пользователя.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Анализ прогресса</h3>
+                        <p class="card__text">
+                            В правом блоке отображается статистика: количество примеров, число верных решений и процент
+                            успешности.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
+            <a href="404.html" class="footer__link">Проверка страницы 404</a>
+        </div>
+    </footer>
+
+    <script src="js/trainer-logic.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
