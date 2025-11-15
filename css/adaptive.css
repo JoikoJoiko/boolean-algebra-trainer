@@ -1,0 +1,26 @@
+/* Tablet */
+@media (max-width: 1199px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .card {
+    padding: 16px 14px;
+  }
+
+  .nav {
+    display: none; 
+  }
+}

@@ -1,0 +1,25 @@
+:root {
+  /* Цвета */
+  --bg-main: #0B0D14;
+  --bg-card: #11141E;
+  --bg-secondary: #161A28;
+
+  --accent: #7C5CFF;
+  --accent-hover: #A68FFF;
+  --accent-soft: rgba(124, 92, 255, 0.15);
+
+  --text-main: #F5F6FF;
+  --text-muted: #9AA0B8;
+  --border: #24283A;
+
+  --success: #3CD38B;
+  --error: #FF4F7D;
+
+  /* Радиусы / тени */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  /* Интерфейс */
+  --transition-fast: 0.2s ease;
+}
