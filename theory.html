@@ -15,16 +15,27 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/adaptive.css">
-<script>
-  (function () {
-    try {
-      var saved = localStorage.getItem('bt_theme');
-      if (saved === 'light') {
-        document.documentElement.classList.add('page--light');
-      }
-    } catch (e) {}
-  })();
-</script>
+    <script>
+        (function () {
+            var THEME_KEY = 'bat_theme';
+
+            try {
+                var saved = localStorage.getItem(THEME_KEY);
+                var prefersLight =
+                    window.matchMedia &&
+                    window.matchMedia('(prefers-color-scheme: light)').matches;
+
+                var isLight = saved === 'light' || (saved === null && prefersLight);
+
+                if (isLight) {
+                    document.documentElement.classList.add('page--light');
+                } else {
+                    document.documentElement.classList.remove('page--light');
+                }
+            } catch (e) {
+            }
+        })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 

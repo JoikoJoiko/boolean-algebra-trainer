@@ -1,3 +1,7 @@
+/* =========================
+   БАЗА
+   ========================= */
+
 *,
 *::before,
 *::after {
@@ -15,11 +19,6 @@ body.page {
     font-size: 15px;
 }
 
-.page--light body {
-    background: radial-gradient(circle at top left, #f3ebff 0, #f6f7ff 40%, #ffffff 100%);
-    color: #161827;
-}
-
 .main {
     flex: 1 0 auto;
 }
@@ -30,6 +29,10 @@ body.page {
     padding: 0 32px;
 }
 
+/* =========================
+   ШАПКА / НАВИГАЦИЯ
+   ========================= */
+
 .header {
     position: sticky;
     top: 0;
@@ -37,11 +40,6 @@ body.page {
     backdrop-filter: blur(16px);
     background: linear-gradient(to bottom, rgba(11, 13, 20, 0.96), rgba(11, 13, 20, 0.78), transparent);
     border-bottom: 1px solid rgba(36, 40, 58, 0.7);
-}
-
-.page--light .header {
-    background: rgba(245, 246, 251, 0.95);
-    border-bottom: 1px solid var(--border);
 }
 
 .header__inner {
@@ -89,7 +87,11 @@ body.page {
     color: var(--text-muted);
     cursor: pointer;
     white-space: nowrap;
-    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
 }
 
 .theme-toggle:hover {
@@ -98,11 +100,9 @@ body.page {
     color: var(--text-main);
 }
 
-.page--light .theme-toggle {
-  background: #fff;
-  color: #222;
-  border-color: #aaa;
-}
+/* =========================
+   HERO — БАЗА
+   ========================= */
 
 .hero {
     padding: 72px 0 56px;
@@ -161,12 +161,6 @@ body.page {
     color: var(--text-muted);
 }
 
-.page--light .hero-tag {
-    background: #f5f3ff;
-    border-color: var(--border);
-    color: var(--text-muted);
-}
-
 .hero__preview {
     display: flex;
     justify-content: flex-end;
@@ -183,14 +177,6 @@ body.page {
     max-width: 340px;
     box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55);
 }
-
-.page--light .hero-card {
-    background:
-        radial-gradient(circle at top left, rgba(124, 92, 255, 0.16), transparent 60%),
-        var(--bg-card);
-    box-shadow: 0 16px 40px rgba(15, 18, 40, 0.12);
-}
-
 
 .hero-card__label {
     font-size: 11px;
@@ -211,6 +197,59 @@ body.page {
     color: var(--text-muted);
 }
 
+/* =========================
+   HERO ГЛАВНОЙ (hero--index)
+   ========================= */
+
+.hero--index {
+    position: relative;
+    padding: 96px 0 80px;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero--index::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.32), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0, 189, 214, 0.28), transparent 60%),
+        repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px,
+            transparent 12px
+        );
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.hero--index .hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+}
+
+.hero--index .hero__title {
+    font-size: clamp(36px, 5vw, 48px);
+}
+
+.hero--index .hero__subtitle {
+    max-width: 620px;
+}
+
+.hero--index .hero__meta {
+    margin-top: 10px;
+}
+
+/* =========================
+   КНОПКИ
+   ========================= */
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -223,7 +262,12 @@ body.page {
     font-weight: 500;
     text-decoration: none;
     cursor: pointer;
-    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 .btn--primary {
@@ -235,6 +279,11 @@ body.page {
 .btn--primary:hover {
     transform: translateY(-1px);
     box-shadow: 0 18px 40px rgba(124, 92, 255, 0.46);
+}
+
+.btn--primary:disabled {
+    opacity: 0.65;
+    cursor: default;
 }
 
 .btn--ghost {
@@ -258,18 +307,21 @@ body.page {
     border-color: var(--accent);
 }
 
+.btn--small {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* =========================
+   СЕКЦИИ / КАРТОЧКИ / ГРИД
+   ========================= */
+
 .section {
     padding: 56px 0;
 }
 
 .section--accent {
     background: linear-gradient(to bottom, rgba(17, 20, 30, 0.96), rgba(11, 13, 20, 1));
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.page--light .section--accent {
-    background: linear-gradient(to bottom, #f3efff, #edf1ff);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
@@ -314,11 +366,6 @@ body.page {
     border-radius: var(--radius-md);
 }
 
-.page--light .card {
-    background: var(--bg-card);
-    border-color: var(--border);
-}
-
 .card__title {
     font-family: "Sora", sans-serif;
     font-size: 16px;
@@ -329,6 +376,59 @@ body.page {
     font-size: 14px;
     color: var(--text-muted);
 }
+
+/* СЕКЦИИ С КАРТОЧКАМИ (ДЛЯ КОГО / КАК УСТРОЕН) */
+
+.section--cards .grid--3 {
+    gap: 20px;
+}
+
+.section--cards .card {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        border-color 0.18s ease-out,
+        background 0.18s ease-out;
+}
+
+.section--cards .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(124, 92, 255, 0.22), transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease-out;
+}
+
+.section--cards .card--highlight {
+    padding-top: 22px;
+}
+
+.section--cards .card__eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.section--cards .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    border-color: var(--accent);
+}
+
+.section--cards .card:hover::before {
+    opacity: 1;
+}
+
+/* =========================
+   СТАРЫЙ ПРОСТОЙ ТРЕНАЖЁР
+   (может использоваться где-то ещё)
+   ========================= */
 
 .trainer {
     display: grid;
@@ -390,10 +490,6 @@ body.page {
     outline: none;
 }
 
-.page--light .field__control {
-    background: #ffffff;
-}
-
 .field__control:focus {
     border-color: var(--accent);
 }
@@ -438,33 +534,591 @@ body.page {
     margin: 0;
 }
 
-.footer {
-    border-top: 1px solid rgba(36, 40, 58, 0.85);
-    padding: 12px 0;
-    background: #05060C;
+/* =========================
+   НОВЫЙ ТРЕНАЖЁР — ОБЩИЙ ЛЭЙАУТ
+   ========================= */
+
+.section--trainer {
+    min-height: 80vh;
 }
 
-.page--light .footer {
-    background: #E3E6F4;
-    border-top-color: var(--border);
-}
-
-.footer__inner {
+.trainer-shell {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.trainer-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.trainer-layout__left {
+    display: flex;
+    flex-direction: column;
     gap: 12px;
+}
+
+.trainer-layout__center {
+    min-width: 0;
+}
+
+/* режимы (уровни / свободный) */
+
+.trainer-modes {
+    display: inline-flex;
+    gap: 6px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(10, 13, 24, 0.8);
+    border: 1px solid var(--border);
+}
+
+.trainer-modes__tab {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 999px;
     font-size: 12px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.trainer-modes__tab--active {
+    background: var(--accent-soft);
+    color: var(--text-main);
+}
+
+/* левая колонка: уровни / легенда */
+
+.trainer-panel {
+    padding: 18px 18px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+}
+
+.trainer-panel__text {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+/* список уровней */
+
+.level-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    gap: 10px;
+}
+
+.level-list__item {
+    padding: 10px 10px 9px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(7, 9, 20, 0.9);
+    cursor: pointer;
+    transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.level-list__item:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.level-list__item--active {
+    border-color: var(--accent);
+}
+
+.level-list__item--done {
+    border-color: #3ecf8e;
+}
+
+.level-list__title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.level-list__expr {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.level-list__meta {
+    font-size: 11px;
     color: var(--text-muted);
 }
 
-.footer__link {
-    color: var(--accent);
-    text-decoration: none;
+.level-list__status {
+    margin-top: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
 }
 
-.footer__link:hover {
-    text-decoration: underline;
+.level-list__status[data-status="done"] {
+    color: #3ecf8e;
 }
+
+/* правая / центральная карточка тренажёра */
+
+.trainer-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trainer-card__header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.trainer-card__header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trainer-card__mode {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.trainer-card__level-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.trainer-card__title {
+    font-family: "Sora", sans-serif;
+    font-size: 16px;
+}
+
+.trainer-hint-btn {
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-size: 11px;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.trainer-hint-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--text-main);
+}
+
+.trainer-card__target {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.trainer-card__target--hidden {
+    display: none;
+}
+
+.trainer-card__story {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-left: 3px solid var(--accent);
+    padding-left: 10px;
+}
+
+/* двухколоночная сетка внутри основной карточки */
+
+.trainer-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.trainer-main-grid__left,
+.trainer-main-grid__right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* палитра блоков */
+
+.trainer-palette {
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    padding: 10px 12px 10px;
+    background: radial-gradient(circle at top left, rgba(124, 92, 255, 0.18), transparent 60%);
+}
+
+.trainer-palette__header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trainer-palette__hint {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.trainer-palette__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.palette-item {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(7, 9, 20, 0.9);
+    padding: 6px 10px;
+    font-size: 11px;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.palette-item:active {
+    cursor: grabbing;
+}
+
+.palette-item__title {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 11px;
+}
+
+.palette-item__desc {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.palette-item:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* доска (dropzone) */
+
+.trainer-board {
+    margin-top: 4px;
+}
+
+.trainer-board__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.trainer-board__dropzone {
+    margin-top: 8px;
+    border-radius: 18px;
+    border: 1px dashed var(--border);
+    padding: 12px;
+    min-height: 120px;
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.12), transparent 60%),
+        rgba(7, 9, 20, 0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.trainer-board__placeholder {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 16px 8px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+.trainer-board__dropzone--has-gates .trainer-board__placeholder {
+    display: none;
+}
+
+/* входные параметры */
+
+.trainer-inputs__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.trainer-inputs__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.trainer-inputs__hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.trainer-input-item {
+    position: relative;
+    min-width: 120px;
+}
+
+.trainer-input-item__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.trainer-input-item__name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.trainer-input-item__controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trainer-input-item__random {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.trainer-input-item__delete {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 2px;
+}
+
+.trainer-input-item__delete:hover {
+    color: var(--accent);
+}
+
+/* блоки-схемы (гейты) */
+
+.trainer-gates__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.trainer-gates__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.gate-slot {
+    position: relative;
+    padding: 10px 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.25), transparent 55%),
+        #070914;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.gate-slot--hover {
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+.gate-slot__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.gate-slot__name {
+    font-family: "Sora", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gate-slot__hint {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.gate-slot__final-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.gate-slot__final-label input {
+    margin: 0;
+}
+
+.gate-slot__delete {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+.gate-slot__delete:hover {
+    color: #dc4c46;
+}
+
+/* соединения (бывшие "провода") */
+
+.trainer-wires {
+    margin-top: 4px;
+}
+
+.trainer-wires__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.trainer-wires__item {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(10, 14, 28, 0.9);
+}
+
+.trainer-wires__hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* действия / результат / анализ */
+
+.trainer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.trainer-result__message {
+    min-height: 20px;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.trainer-result__table {
+    margin-top: 8px;
+    max-height: 260px;
+    overflow: auto;
+}
+
+.trainer-analysis__block {
+    margin-bottom: 10px;
+}
+
+.trainer-analysis__title {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+/* таймер */
+
+.trainer-timer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trainer-timer__label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* таблица истинности */
+
+.truth-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 12px;
+}
+
+.truth-table th,
+.truth-table td {
+    border: 1px solid var(--border);
+    padding: 4px 6px;
+    text-align: center;
+}
+
+.truth-table th {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.truth-table__row--mismatch {
+    background: rgba(220, 76, 70, 0.16);
+}
+
+/* =========================
+   ТЕОРИЯ / ABOUT
+   ========================= */
 
 .theory-layout {
     display: grid;
@@ -486,16 +1140,16 @@ body.page {
     color: var(--text-main);
 }
 
+.theory-table-wrap {
+    overflow-x: auto;
+}
+
 .theory-table {
     margin-top: 10px;
     display: grid;
     gap: 4px;
     font-family: "JetBrains Mono", Consolas, Monaco, monospace;
     font-size: 13px;
-}
-
-.theory-table-wrap {
-    overflow-x: auto;
 }
 
 .theory-table-head {
@@ -523,23 +1177,13 @@ body.page {
     align-items: center;
 }
 
-
-
 .about-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.3fr);
     gap: 24px;
 }
 
-.about-steps {
-    list-style: none;
-    margin: 10px 0 0;
-    padding: 0;
-    display: grid;
-    gap: 6px;
-    font-size: 14px;
-}
-
+.about-steps,
 .about-tags {
     list-style: none;
     margin: 10px 0 0;
@@ -549,9 +1193,37 @@ body.page {
     font-size: 14px;
 }
 
+/* =========================
+   ПОДВАЛ
+   ========================= */
 
+.footer {
+    border-top: 1px solid rgba(36, 40, 58, 0.85);
+    padding: 12px 0;
+    background: #05060C;
+}
 
-/* 404 page */
+.footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.footer__link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer__link:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   404
+   ========================= */
+
 .page--404 .header {
     backdrop-filter: blur(4px);
 }
@@ -570,7 +1242,7 @@ body.page {
     font-size: 96px;
     line-height: 1;
     font-weight: 700;
-    font-family: 'Sora', sans-serif;
+    font-family: "Sora", sans-serif;
     color: var(--accent);
     margin-bottom: 20px;
 }
@@ -594,10 +1266,44 @@ body.page {
     gap: 12px;
 }
 
-.page--light body {
+/* =========================
+   СВЕТЛАЯ ТЕМА (.page--light на <html>)
+   ========================= */
+
+/* фон и текст */
+
+.page--light body.page {
     background: radial-gradient(circle at top left, #f3ebff 0, #f6f7ff 40%, #ffffff 100%);
     color: #161827;
 }
+
+/* Шапка / подвал / секции */
+
+.page--light .header {
+    background: rgba(245, 246, 251, 0.95);
+    border-bottom: 1px solid #d6d8ea;
+}
+
+.page--light .section--accent {
+    background: linear-gradient(to bottom, #f3f0ff, #edf1ff);
+    border-top: 1px solid #d6d8ea;
+    border-bottom: 1px solid #d6d8ea;
+}
+
+.page--light .footer {
+    background: #e7e9f7;
+    border-top-color: #d6d8ea;
+}
+
+/* Тоггл темы */
+
+.page--light .theme-toggle {
+    background: #ffffff;
+    color: #222222;
+    border-color: #aaaaaa;
+}
+
+/* Hero / карточки / теги */
 
 .page--light .hero-card {
     background:
@@ -614,6 +1320,14 @@ body.page {
     color: #7b7f94;
 }
 
+.page--light .hero-tag {
+    background: #f4f1ff;
+    border-color: #d6d8ea;
+    color: #737799;
+}
+
+/* Карточки разделов */
+
 .page--light .card {
     background: rgba(255, 255, 255, 0.98);
     border-color: #d6d8ea;
@@ -628,27 +1342,13 @@ body.page {
     color: #626782;
 }
 
-.page--light .hero-tag {
-    background: #f4f1ff;
-    border-color: #d6d8ea;
-    color: #737799;
+/* Поля ввода */
+
+.page--light .field__control {
+    background: #ffffff;
 }
 
-.page--light .section--accent {
-    background: linear-gradient(to bottom, #f3f0ff, #edf1ff);
-    border-top: 1px solid #d6d8ea;
-    border-bottom: 1px solid #d6d8ea;
-}
-
-.page--light .header {
-    background: rgba(245, 246, 251, 0.95);
-    border-bottom: 1px solid #d6d8ea;
-}
-
-.page--light .footer {
-    background: #e7e9f7;
-    border-top-color: #d6d8ea;
-}
+/* Кнопки в светлой теме */
 
 .page--light .btn--primary {
     background: linear-gradient(135deg, #6a46ff, #8b5dff);
@@ -657,15 +1357,10 @@ body.page {
     font-weight: 600;
 }
 
-.btn--primary:disabled {
-    opacity: 0.65;
-    cursor: default;
-}
-
 .page--light .btn--ghost {
-    color: #4a3aff;               
-    border-color: #b8a8ff;         
-    background-color: rgba(255, 255, 255, 0.6); 
+    color: #4a3aff;
+    border-color: #b8a8ff;
+    background-color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
 
@@ -673,4 +1368,70 @@ body.page {
     background-color: rgba(190, 170, 255, 0.25);
     border-color: #9b87ff;
     color: #3a2aff;
+}
+
+/* hero главной — светлый фон */
+
+.page--light .hero--index::before {
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.18), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0, 122, 255, 0.16), transparent 60%),
+        repeating-linear-gradient(
+            135deg,
+            rgba(25, 28, 60, 0.04),
+            rgba(25, 28, 60, 0.04) 1px,
+            transparent 1px,
+            transparent 12px
+        );
+    opacity: 0.8;
+}
+
+/* Секции с карточками — мягче тени */
+
+.page--light .section--cards .card:hover {
+    box-shadow: 0 18px 40px rgba(23, 28, 60, 0.18);
+}
+
+/* Новый тренажёр — светлые фоны */
+
+.page--light .trainer-modes {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.page--light .trainer-panel {
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.page--light .trainer-palette {
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.12), transparent 60%),
+        #ffffff;
+}
+
+.page--light .gate-slot {
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.16), transparent 55%),
+        #ffffff;
+}
+
+.page--light .trainer-wires__item {
+    background: #f4f4ff;
+}
+
+/* Таблица истинности — светлый заголовок */
+
+.page--light .truth-table th {
+    background: #f4f4ff;
+}
+
+/* Палитра блоков — текст всегда читаемый */
+
+.palette-item__title,
+.palette-item__desc {
+    color: var(--text-main);
+}
+
+.page--light .palette-item__title,
+.page--light .palette-item__desc {
+    color: var(--text-main);
 }

@@ -17,16 +17,25 @@
     <link rel="stylesheet" href="css/adaptive.css">
     <script>
         (function () {
+            var THEME_KEY = 'bat_theme';
+
             try {
-                var saved = localStorage.getItem('bt_theme');
-                if (saved === 'light') {
+                var saved = localStorage.getItem(THEME_KEY);
+                var prefersLight =
+                    window.matchMedia &&
+                    window.matchMedia('(prefers-color-scheme: light)').matches;
+
+                var isLight = saved === 'light' || (saved === null && prefersLight);
+
+                if (isLight) {
                     document.documentElement.classList.add('page--light');
+                } else {
+                    document.documentElement.classList.remove('page--light');
                 }
-            } catch (e) { }
+            } catch (e) {
+            }
         })();
     </script>
-
-
 </head>
 
 <body class="page page--404">

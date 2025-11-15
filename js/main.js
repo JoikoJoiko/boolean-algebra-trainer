@@ -1,31 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('themeToggle');
+document.addEventListener('DOMContentLoaded', function () {
+  var THEME_KEY = 'bat_theme';
+  var root = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
 
-  const applySavedTheme = () => {
-    const saved = localStorage.getItem('bt_theme');
-    const root = document.documentElement;
-    if (saved === 'light') {
-      root.classList.add('page--light');
-    } else {
-      root.classList.remove('page--light');
-    }
-  };
+  function isLight() {
+    return root.classList.contains('page--light');
+  }
 
-  const updateText = () => {
+  function updateToggleText() {
     if (!toggle) return;
-    const isLight = document.documentElement.classList.contains('page--light');
-    toggle.textContent = isLight ? 'Тёмная тема' : 'Светлая тема';
-  };
+    toggle.textContent = isLight() ? 'Тёмная тема' : 'Светлая тема';
+  }
 
-  applySavedTheme();
-  updateText();
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var nextIsLight = !isLight();
 
-  if (!toggle) return;
+      root.classList.toggle('page--light', nextIsLight);
 
-  toggle.addEventListener('click', () => {
-    const root = document.documentElement;
-    const isLight = root.classList.toggle('page--light');
-    localStorage.setItem('bt_theme', isLight ? 'light' : 'dark');
-    updateText();
-  });
+      try {
+        localStorage.setItem(THEME_KEY, nextIsLight ? 'light' : 'dark');
+      } catch (e) {
+      }
+
+      updateToggleText();
+    });
+  }
+
+  updateToggleText();
 });
