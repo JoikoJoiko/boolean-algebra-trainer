@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Теория по булевой алгебре</title>
@@ -7,239 +8,263 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/adaptive.css">
-
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('bt_theme');
+      if (saved === 'light') {
+        document.documentElement.classList.add('page--light');
+      }
+    } catch (e) {}
+  })();
+</script>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
+
 <body class="page">
-<header class="header">
-    <div class="container header__inner">
-        <div class="logo">BoolTrainer</div>
+    <header class="header">
+        <div class="container header__inner">
+            <div class="logo">BoolTrainer</div>
 
-        <nav class="nav">
-            <a href="index.html" class="nav__link">Главная</a>
-            <a href="theory.html" class="nav__link nav__link--active">Теория</a>
-            <a href="about.html" class="nav__link">О проекте</a>
-        </nav>
+            <nav class="nav">
+                <a href="index.html" class="nav__link">Главная</a>
+                <a href="theory.html" class="nav__link nav__link--active">Теория</a>
+                <a href="about.html" class="nav__link">О проекте</a>
+            </nav>
 
-        <button class="theme-toggle" type="button" id="themeToggle">
-            Светлая тема
-        </button>
-    </div>
-</header>
-
-<main class="main">
-
-    <section class="hero hero--main">
-        <div class="container hero__inner">
-            <div class="hero__content">
-                <span class="hero__eyebrow">Теоретический материал</span>
-                <h1 class="hero__title">Основы булевой алгебры простыми словами</h1>
-                <p class="hero__subtitle">
-                    Здесь собрана краткая теория, которая нужна для работы с тренажёром: что такое булева алгебра,
-                    какие бывают логические операции и как читать таблицы истинности.
-                </p>
-                <div class="hero__actions">
-                    <a href="index.html#trainer" class="btn btn--primary">Перейти к тренажёру</a>
-                    <a href="#laws" class="btn btn--ghost">Перейти к законам</a>
-                </div>
-            </div>
-
-            <div class="hero__preview">
-                <div class="hero-card">
-                    <div class="hero-card__label">Пример записи</div>
-                    <div class="hero-card__expr">F = (A ∧ ¬B) ∨ C</div>
-                    <div class="hero-card__hint">
-                        Задача булевой алгебры – ответить, чему равно выражение: 0 или 1 при заданных значениях A, B и C.
-                    </div>
-                </div>
-            </div>
+            <button class="theme-toggle" type="button" id="themeToggle">
+                Светлая тема
+            </button>
         </div>
-    </section>
+    </header>
 
-    <section class="section" id="intro">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Что такое булева алгебра</h2>
-                <p class="section__subtitle">
-                    Булева алгебра – это раздел математики, в котором все значения принимают только два варианта: 0 или 1.
-                    Обычно 0 понимают как «ложь», а 1 – как «истину».
-                </p>
-            </header>
+    <main class="main">
 
-            <div class="theory-layout">
-                <div class="card">
-                    <h3 class="card__title">Где она используется</h3>
-                    <p class="card__text">
-                        Булева алгебра лежит в основе работы логических схем, процессоров, условий в программах и поисковых запросов.
-                        Любое сложное «если – то – иначе» внутри кода в итоге сводится к набору нулей и единиц.
+        <section class="hero hero--main">
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="hero__eyebrow">Теоретический материал</span>
+                    <h1 class="hero__title">Основы булевой алгебры простыми словами</h1>
+                    <p class="hero__subtitle">
+                        Здесь собрана краткая теория, которая нужна для работы с тренажёром: что такое булева алгебра,
+                        какие бывают логические операции и как читать таблицы истинности.
                     </p>
-                    <p class="card__text">
-                        Поэтому умение читать и преобразовывать логические выражения напрямую помогает лучше понимать программирование
-                        и цифровую электронику.
-                    </p>
+                    <div class="hero__actions">
+                        <a href="index.html#trainer" class="btn btn--primary">Перейти к тренажёру</a>
+                        <a href="#laws" class="btn btn--ghost">Перейти к законам</a>
+                    </div>
                 </div>
 
-                <div class="card theory-list">
-                    <h3 class="card__title">Основные элементы</h3>
-                    <ul class="theory-ul">
-                        <li><span class="theory-label">Переменные:</span> A, B, C и другие, каждая может быть 0 или 1.</li>
-                        <li><span class="theory-label">Операции:</span> И, ИЛИ, НЕ и их комбинации.</li>
-                        <li><span class="theory-label">Выражение:</span> формула из переменных и операций, например F = A ∨ ¬B.</li>
-                        <li><span class="theory-label">Таблица истинности:</span> таблица, показывающая результат для всех наборов входных данных.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="ops">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Базовые логические операции</h2>
-                <p class="section__subtitle">
-                    В тренажёре используются три основные операции. Они записываются символами и читаются как обычные фразы на русском.
-                </p>
-            </header>
-
-            <div class="grid grid--3">
-                <article class="card">
-                    <h3 class="card__title">Конъюнкция (И)</h3>
-                    <p class="card__text">
-                        Обозначение: A ∧ B. Результат равен 1 только тогда, когда оба аргумента равны 1.
-                    </p>
-                    <div class="theory-table">
-                        <div class="theory-row"><span>0 ∧ 0 =</span><span>0</span></div>
-                        <div class="theory-row"><span>0 ∧ 1 =</span><span>0</span></div>
-                        <div class="theory-row"><span>1 ∧ 0 =</span><span>0</span></div>
-                        <div class="theory-row"><span>1 ∧ 1 =</span><span>1</span></div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h3 class="card__title">Дизъюнкция (ИЛИ)</h3>
-                    <p class="card__text">
-                        Обозначение: A ∨ B. Результат равен 1, если хотя бы один аргумент равен 1.
-                    </p>
-                    <div class="theory-table">
-                        <div class="theory-row"><span>0 ∨ 0 =</span><span>0</span></div>
-                        <div class="theory-row"><span>0 ∨ 1 =</span><span>1</span></div>
-                        <div class="theory-row"><span>1 ∨ 0 =</span><span>1</span></div>
-                        <div class="theory-row"><span>1 ∨ 1 =</span><span>1</span></div>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h3 class="card__title">Отрицание (НЕ)</h3>
-                    <p class="card__text">
-                        Обозначение: ¬A. Переворачивает значение: из 0 делает 1, из 1 – 0.
-                    </p>
-                    <div class="theory-table">
-                        <div class="theory-row"><span>¬0 =</span><span>1</span></div>
-                        <div class="theory-row"><span>¬1 =</span><span>0</span></div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="truth-table">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Пример таблицы истинности</h2>
-                <p class="section__subtitle">
-                    Таблица истинности показывает, чему равно выражение при всех возможных значениях входных переменных.
-                    Ниже приведён пример для выражения F = A ∨ (B ∧ ¬C).
-                </p>
-            </header>
-
-            <div class="card theory-table-wrap">
-                <div class="theory-table-head">
-                    <span>A</span>
-                    <span>B</span>
-                    <span>C</span>
-                    <span>¬C</span>
-                    <span>B ∧ ¬C</span>
-                    <span>F = A ∨ (B ∧ ¬C)</span>
-                </div>
-                <div class="theory-table-body">
-                    <div class="theory-row">
-                        <span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>0</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>1</span><span>0</span><span>0</span><span>1</span><span>0</span><span>1</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>1</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span>
-                    </div>
-                    <div class="theory-row">
-                        <span>1</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span>
+                <div class="hero__preview">
+                    <div class="hero-card">
+                        <div class="hero-card__label">Пример записи</div>
+                        <div class="hero-card__expr">F = (A ∧ ¬B) ∨ C</div>
+                        <div class="hero-card__hint">
+                            Задача булевой алгебры – ответить, чему равно выражение: 0 или 1 при заданных значениях A, B
+                            и C.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section" id="laws">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Основные законы булевой алгебры</h2>
-                <p class="section__subtitle">
-                    Эти правила помогают упрощать выражения и проверять свои решения. В тренажёре они используются неявно,
-                    но их полезно держать в голове.
-                </p>
-            </header>
+        <section class="section" id="intro">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Что такое булева алгебра</h2>
+                    <p class="section__subtitle">
+                        Булева алгебра – это раздел математики, в котором все значения принимают только два варианта: 0
+                        или 1.
+                        Обычно 0 понимают как «ложь», а 1 – как «истину».
+                    </p>
+                </header>
 
-            <div class="theory-layout">
-                <div class="card theory-list">
-                    <h3 class="card__title">Базовые законы</h3>
-                    <ul class="theory-ul">
-                        <li><span class="theory-label">Закон тождества:</span> A ∧ 1 = A, A ∨ 0 = A.</li>
-                        <li><span class="theory-label">Закон нуля:</span> A ∧ 0 = 0, A ∨ 1 = 1.</li>
-                        <li><span class="theory-label">Идемпотентность:</span> A ∧ A = A, A ∨ A = A.</li>
-                        <li><span class="theory-label">Закон двойного отрицания:</span> ¬(¬A) = A.</li>
-                    </ul>
-                </div>
+                <div class="theory-layout">
+                    <div class="card">
+                        <h3 class="card__title">Где она используется</h3>
+                        <p class="card__text">
+                            Булева алгебра лежит в основе работы логических схем, процессоров, условий в программах и
+                            поисковых запросов.
+                            Любое сложное «если – то – иначе» внутри кода в итоге сводится к набору нулей и единиц.
+                        </p>
+                        <p class="card__text">
+                            Поэтому умение читать и преобразовывать логические выражения напрямую помогает лучше
+                            понимать программирование
+                            и цифровую электронику.
+                        </p>
+                    </div>
 
-                <div class="card theory-list">
-                    <h3 class="card__title">Дистрибутивность и законы де Моргана</h3>
-                    <ul class="theory-ul">
-                        <li><span class="theory-label">Дистрибутивность:</span> A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C).</li>
-                        <li>A ∨ (B ∧ C) = (A ∨ B) ∧ (A ∨ C).</li>
-                        <li><span class="theory-label">Законы де Моргана:</span> ¬(A ∧ B) = ¬A ∨ ¬B.</li>
-                        <li>¬(A ∨ B) = ¬A ∧ ¬B.</li>
-                    </ul>
+                    <div class="card theory-list">
+                        <h3 class="card__title">Основные элементы</h3>
+                        <ul class="theory-ul">
+                            <li><span class="theory-label">Переменные:</span> A, B, C и другие, каждая может быть 0 или
+                                1.</li>
+                            <li><span class="theory-label">Операции:</span> И, ИЛИ, НЕ и их комбинации.</li>
+                            <li><span class="theory-label">Выражение:</span> формула из переменных и операций, например
+                                F = A ∨ ¬B.</li>
+                            <li><span class="theory-label">Таблица истинности:</span> таблица, показывающая результат
+                                для всех наборов входных данных.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <section class="section" id="ops">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Базовые логические операции</h2>
+                    <p class="section__subtitle">
+                        В тренажёре используются три основные операции. Они записываются символами и читаются как
+                        обычные фразы на русском.
+                    </p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">Конъюнкция (И)</h3>
+                        <p class="card__text">
+                            Обозначение: A ∧ B. Результат равен 1 только тогда, когда оба аргумента равны 1.
+                        </p>
+                        <div class="theory-table">
+                            <div class="theory-row"><span>0 ∧ 0 =</span><span>0</span></div>
+                            <div class="theory-row"><span>0 ∧ 1 =</span><span>0</span></div>
+                            <div class="theory-row"><span>1 ∧ 0 =</span><span>0</span></div>
+                            <div class="theory-row"><span>1 ∧ 1 =</span><span>1</span></div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">Дизъюнкция (ИЛИ)</h3>
+                        <p class="card__text">
+                            Обозначение: A ∨ B. Результат равен 1, если хотя бы один аргумент равен 1.
+                        </p>
+                        <div class="theory-table">
+                            <div class="theory-row"><span>0 ∨ 0 =</span><span>0</span></div>
+                            <div class="theory-row"><span>0 ∨ 1 =</span><span>1</span></div>
+                            <div class="theory-row"><span>1 ∨ 0 =</span><span>1</span></div>
+                            <div class="theory-row"><span>1 ∨ 1 =</span><span>1</span></div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">Отрицание (НЕ)</h3>
+                        <p class="card__text">
+                            Обозначение: ¬A. Переворачивает значение: из 0 делает 1, из 1 – 0.
+                        </p>
+                        <div class="theory-table">
+                            <div class="theory-row"><span>¬0 =</span><span>1</span></div>
+                            <div class="theory-row"><span>¬1 =</span><span>0</span></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="truth-table">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Пример таблицы истинности</h2>
+                    <p class="section__subtitle">
+                        Таблица истинности показывает, чему равно выражение при всех возможных значениях входных
+                        переменных.
+                        Ниже приведён пример для выражения F = A ∨ (B ∧ ¬C).
+                    </p>
+                </header>
+
+                <div class="card theory-table-wrap">
+                    <div class="theory-table-head">
+                        <span>A</span>
+                        <span>B</span>
+                        <span>C</span>
+                        <span>¬C</span>
+                        <span>B ∧ ¬C</span>
+                        <span>F = A ∨ (B ∧ ¬C)</span>
+                    </div>
+                    <div class="theory-table-body">
+                        <div class="theory-row">
+                            <span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>0</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>1</span><span>0</span><span>0</span><span>1</span><span>0</span><span>1</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>1</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span>
+                        </div>
+                        <div class="theory-row">
+                            <span>1</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="laws">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Основные законы булевой алгебры</h2>
+                    <p class="section__subtitle">
+                        Эти правила помогают упрощать выражения и проверять свои решения. В тренажёре они используются
+                        неявно,
+                        но их полезно держать в голове.
+                    </p>
+                </header>
+
+                <div class="theory-layout">
+                    <div class="card theory-list">
+                        <h3 class="card__title">Базовые законы</h3>
+                        <ul class="theory-ul">
+                            <li><span class="theory-label">Закон тождества:</span> A ∧ 1 = A, A ∨ 0 = A.</li>
+                            <li><span class="theory-label">Закон нуля:</span> A ∧ 0 = 0, A ∨ 1 = 1.</li>
+                            <li><span class="theory-label">Идемпотентность:</span> A ∧ A = A, A ∨ A = A.</li>
+                            <li><span class="theory-label">Закон двойного отрицания:</span> ¬(¬A) = A.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card theory-list">
+                        <h3 class="card__title">Дистрибутивность и законы де Моргана</h3>
+                        <ul class="theory-ul">
+                            <li><span class="theory-label">Дистрибутивность:</span> A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C).
+                            </li>
+                            <li>A ∨ (B ∧ C) = (A ∨ B) ∧ (A ∨ C).</li>
+                            <li><span class="theory-label">Законы де Моргана:</span> ¬(A ∧ B) = ¬A ∨ ¬B.</li>
+                            <li>¬(A ∨ B) = ¬A ∧ ¬B.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
+            <a href="404.html" class="footer__link">Проверка страницы 404</a>
         </div>
-    </section>
+    </footer>
 
-</main>
-
-<footer class="footer">
-    <div class="container footer__inner">
-        <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
-        <a href="404.html" class="footer__link">Проверка страницы 404</a>
-    </div>
-</footer>
-
-<script src="js/trainer-logic.js"></script>
-<script src="js/main.js"></script>
+    <script src="js/trainer-logic.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>

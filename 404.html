@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Страница не найдена — Ошибка 404</title>
@@ -7,61 +8,76 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/adaptive.css">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('bt_theme');
+                if (saved === 'light') {
+                    document.documentElement.classList.add('page--light');
+                }
+            } catch (e) { }
+        })();
+    </script>
+
+
 </head>
 
 <body class="page page--404">
 
-<header class="header">
-    <div class="container header__inner">
-        <div class="logo">BoolTrainer</div>
+    <header class="header">
+        <div class="container header__inner">
+            <div class="logo">BoolTrainer</div>
 
-        <nav class="nav">
-            <a href="index.html" class="nav__link">Главная</a>
-            <a href="theory.html" class="nav__link">Теория</a>
-            <a href="about.html" class="nav__link">О проекте</a>
-        </nav>
+            <nav class="nav">
+                <a href="index.html" class="nav__link">Главная</a>
+                <a href="theory.html" class="nav__link">Теория</a>
+                <a href="about.html" class="nav__link">О проекте</a>
+            </nav>
 
-        <button class="theme-toggle" type="button" id="themeToggle">
-            Светлая тема
-        </button>
-    </div>
-</header>
-
-<main class="main main--center">
-
-    <section class="notfound">
-        <div class="container notfound__inner">
-
-            <div class="notfound__code">404</div>
-
-            <h1 class="notfound__title">Страница не найдена</h1>
-
-            <p class="notfound__text">
-                Возможно, вы попали сюда по неверной ссылке.  
-                Или страница была перемещена.  
-                Но не волнуйтесь — вы всё ещё на правильном пути.
-            </p>
-
-            <div class="notfound__actions">
-                <a href="index.html" class="btn btn--primary">Вернуться на главную</a>
-                <a href="theory.html" class="btn btn--ghost">Перейти к теории</a>
-            </div>
+            <button class="theme-toggle" type="button" id="themeToggle">
+                Светлая тема
+            </button>
         </div>
-    </section>
+    </header>
 
-</main>
+    <main class="main main--center">
 
-<footer class="footer">
-    <div class="container footer__inner">
-        <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
-    </div>
-</footer>
+        <section class="notfound">
+            <div class="container notfound__inner">
 
-<script src="js/main.js"></script>
+                <div class="notfound__code">404</div>
+
+                <h1 class="notfound__title">Страница не найдена</h1>
+
+                <p class="notfound__text">
+                    Возможно, вы попали сюда по неверной ссылке.
+                    Или страница была перемещена.
+                    Но не волнуйтесь — вы всё ещё на правильном пути.
+                </p>
+
+                <div class="notfound__actions">
+                    <a href="index.html" class="btn btn--primary">Вернуться на главную</a>
+                    <a href="theory.html" class="btn btn--ghost">Перейти к теории</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
+
 </html>

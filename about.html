@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>О проекте — Тренажёр по булевой алгебре</title>
@@ -7,226 +8,246 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/adaptive.css">
-
+    <script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('bt_theme');
+      if (saved === 'light') {
+        document.documentElement.classList.add('page--light');
+      }
+    } catch (e) {}
+  })();
+</script>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
+
 <body class="page">
-<header class="header">
-    <div class="container header__inner">
-        <div class="logo">BoolTrainer</div>
+    <header class="header">
+        <div class="container header__inner">
+            <div class="logo">BoolTrainer</div>
 
-        <nav class="nav">
-            <a href="index.html" class="nav__link">Главная</a>
-            <a href="theory.html" class="nav__link">Теория</a>
-            <a href="about.html" class="nav__link nav__link--active">О проекте</a>
-        </nav>
+            <nav class="nav">
+                <a href="index.html" class="nav__link">Главная</a>
+                <a href="theory.html" class="nav__link">Теория</a>
+                <a href="about.html" class="nav__link nav__link--active">О проекте</a>
+            </nav>
 
-        <button class="theme-toggle" type="button" id="themeToggle">
-            Светлая тема
-        </button>
-    </div>
-</header>
+            <button class="theme-toggle" type="button" id="themeToggle">
+                Светлая тема
+            </button>
+        </div>
+    </header>
 
-<main class="main">
+    <main class="main">
 
-    <section class="hero hero--main">
-        <div class="container hero__inner">
-            <div class="hero__content">
-                <span class="hero__eyebrow">Информация о проекте</span>
-                <h1 class="hero__title">Тренажёр по булевой алгебре как учебный сайт</h1>
-                <p class="hero__subtitle">
-                    Этот проект создан как учебный веб-ресурс: он помогает разбирать логические выражения,
-                    тренировать умение работать с нулями и единицами и показывает, как теория превращается в удобный инструмент.
-                </p>
-                <div class="hero__actions">
-                    <a href="index.html#trainer" class="btn btn--primary">Открыть тренажёр</a>
-                    <a href="theory.html" class="btn btn--ghost">Перейти к теории</a>
+        <section class="hero hero--main">
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="hero__eyebrow">Информация о проекте</span>
+                    <h1 class="hero__title">Тренажёр по булевой алгебре как учебный сайт</h1>
+                    <p class="hero__subtitle">
+                        Этот проект создан как учебный веб-ресурс: он помогает разбирать логические выражения,
+                        тренировать умение работать с нулями и единицами и показывает, как теория превращается в удобный
+                        инструмент.
+                    </p>
+                    <div class="hero__actions">
+                        <a href="index.html#trainer" class="btn btn--primary">Открыть тренажёр</a>
+                        <a href="theory.html" class="btn btn--ghost">Перейти к теории</a>
+                    </div>
+
+                    <div class="hero__meta">
+                        <span class="hero-tag">Практическая польза для обучения</span>
+                        <span class="hero-tag">Понятный интерфейс без перегрузки</span>
+                        <span class="hero-tag">Сделано как учебный проект</span>
+                    </div>
                 </div>
 
-                <div class="hero__meta">
-                    <span class="hero-tag">Практическая польза для обучения</span>
-                    <span class="hero-tag">Понятный интерфейс без перегрузки</span>
-                    <span class="hero-tag">Сделано как учебный проект</span>
-                </div>
-            </div>
-
-            <div class="hero__preview">
-                <div class="hero-card">
-                    <div class="hero-card__label">Формат проекта</div>
-                    <div class="hero-card__expr">«Мини-платформа» для тренировки логики</div>
-                    <div class="hero-card__hint">
-                        В одном месте собраны и теория, и практический тренажёр, и описание проекта.
+                <div class="hero__preview">
+                    <div class="hero-card">
+                        <div class="hero-card__label">Формат проекта</div>
+                        <div class="hero-card__expr">«Мини-платформа» для тренировки логики</div>
+                        <div class="hero-card__hint">
+                            В одном месте собраны и теория, и практический тренажёр, и описание проекта.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section" id="goal">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Цель и идея проекта</h2>
-                <p class="section__subtitle">
-                    Проект задумывался как простой способ дать пользователю «живой» опыт работы с булевой алгеброй,
-                    не превращая его в скучную страницу с формулами.
-                </p>
-            </header>
-
-            <div class="about-layout">
-                <div class="card">
-                    <h3 class="card__title">Цель</h3>
-                    <p class="card__text">
-                        Создать веб-тренажёр, который позволяет:
+        <section class="section" id="goal">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Цель и идея проекта</h2>
+                    <p class="section__subtitle">
+                        Проект задумывался как простой способ дать пользователю «живой» опыт работы с булевой алгеброй,
+                        не превращая его в скучную страницу с формулами.
                     </p>
-                    <ul class="about-steps">
-                        <li>закреплять теорию через практику на примерах;</li>
-                        <li>видеть связь между логическими выражениями и их результатами;</li>
-                        <li>следить за собственным прогрессом в решении задач.</li>
-                    </ul>
-                    <p class="card__text">
-                        При этом интерфейс должен оставаться простым: чтобы с ним было комфортно работать и школьнику,
-                        и студенту на первом курсе.
-                    </p>
-                </div>
+                </header>
 
-                <div class="card">
-                    <h3 class="card__title">Задачи проекта</h3>
-                    <ul class="about-steps">
-                        <li>Собрать компактный теоретический раздел по булевой алгебре.</li>
-                        <li>Реализовать страницу с тренажёром и понятной формой ввода.</li>
-                        <li>Сделать адаптивный дизайн, удобный на компьютере и телефоне.</li>
-                        <li>Добавить переключение светлой и тёмной темы для комфортной работы.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="about-layout">
+                    <div class="card">
+                        <h3 class="card__title">Цель</h3>
+                        <p class="card__text">
+                            Создать веб-тренажёр, который позволяет:
+                        </p>
+                        <ul class="about-steps">
+                            <li>закреплять теорию через практику на примерах;</li>
+                            <li>видеть связь между логическими выражениями и их результатами;</li>
+                            <li>следить за собственным прогрессом в решении задач.</li>
+                        </ul>
+                        <p class="card__text">
+                            При этом интерфейс должен оставаться простым: чтобы с ним было комфортно работать и
+                            школьнику,
+                            и студенту на первом курсе.
+                        </p>
+                    </div>
 
-    <section class="section" id="structure">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Структура сайта</h2>
-                <p class="section__subtitle">
-                    Сайт разделён на несколько логичных блоков, чтобы пользователю было легко ориентироваться и возвращаться
-                    к нужному разделу.
-                </p>
-            </header>
-
-            <div class="grid grid--3">
-                <article class="card">
-                    <h3 class="card__title">Главная страница</h3>
-                    <p class="card__text">
-                        Кратко объясняет назначение ресурса, показывает, кому он полезен, и сразу ведёт к тренажёру.
-                        Это точка входа для нового пользователя.
-                    </p>
-                </article>
-                <article class="card">
-                    <h3 class="card__title">Теоретический раздел</h3>
-                    <p class="card__text">
-                        Содержит основные определения, логические операции, примеры таблиц истинности
-                        и ключевые законы булевой алгебры, которые помогают при решении задач.
-                    </p>
-                </article>
-                <article class="card">
-                    <h3 class="card__title">Страница «О проекте»</h3>
-                    <p class="card__text">
-                        Описывает цель, задачи и структуру сайта, а также поясняет, как тренажёр можно использовать
-                        в учёбе и самоподготовке.
-                    </p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="tech">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Как устроен этот сайт внутри</h2>
-                <p class="section__subtitle">
-                    Технологии подобраны так, чтобы сайт был лёгким, быстрым и понятным, без лишних зависимостей.
-                </p>
-            </header>
-
-            <div class="about-layout">
-                <div class="card">
-                    <h3 class="card__title">Используемые технологии</h3>
-                    <ul class="about-tags">
-                        <li>HTML5 — структура страниц и семантика.</li>
-                        <li>CSS3 — оформление, адаптивный дизайн, тёмная и светлая темы.</li>
-                        <li>Vanilla JavaScript — логика работы тренажёра и статистики.</li>
-                    </ul>
-                    <p class="card__text">
-                        Отсутствие тяжёлых фреймворков упрощает поддержку и делает проект понятнее как учебный пример.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3 class="card__title">Особенности реализации</h3>
-                    <ul class="about-tags">
-                        <li>Оформление через CSS-переменные для быстрого переключения темы.</li>
-                        <li>Разделение стилей на базовые и адаптивные файлы.</li>
-                        <li>Чёткая структура: отдельные файлы для логики тренажёра и общих скриптов.</li>
-                    </ul>
-                    <p class="card__text">
-                        Такой подход можно использовать как основу для других учебных проектов: достаточно заменить тему
-                        и предметную область.
-                    </p>
+                    <div class="card">
+                        <h3 class="card__title">Задачи проекта</h3>
+                        <ul class="about-steps">
+                            <li>Собрать компактный теоретический раздел по булевой алгебре.</li>
+                            <li>Реализовать страницу с тренажёром и понятной формой ввода.</li>
+                            <li>Сделать адаптивный дизайн, удобный на компьютере и телефоне.</li>
+                            <li>Добавить переключение светлой и тёмной темы для комфортной работы.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section" id="usage">
-        <div class="container">
-            <header class="section__header section__header--center">
-                <h2 class="section__title">Как можно использовать тренажёр</h2>
-                <p class="section__subtitle">
-                    Проект задуман не только как демонстрация навыков вёрстки и разработки, но и как инструмент,
-                    который действительно можно использовать в учёбе.
-                </p>
-            </header>
+        <section class="section" id="structure">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Структура сайта</h2>
+                    <p class="section__subtitle">
+                        Сайт разделён на несколько логичных блоков, чтобы пользователю было легко ориентироваться и
+                        возвращаться
+                        к нужному разделу.
+                    </p>
+                </header>
 
-            <div class="grid grid--3">
-                <article class="card">
-                    <h3 class="card__title">На занятиях</h3>
-                    <p class="card__text">
-                        Преподаватель может разбирать выражения фронтально, а затем предложить студентам потренироваться
-                        на собственных наборах примеров.
-                    </p>
-                </article>
-                <article class="card">
-                    <h3 class="card__title">Для самоподготовки</h3>
-                    <p class="card__text">
-                        Ученик может открыть сайт из дома, повторить теорию и решить несколько примеров перед контрольной
-                        или зачётом.
-                    </p>
-                </article>
-                <article class="card">
-                    <h3 class="card__title">Как пример проекта</h3>
-                    <p class="card__text">
-                        Сайт можно показывать как пример учебной работы по веб-разработке: в нём есть дизайн,
-                        адаптив, логика и понятное назначение.
-                    </p>
-                </article>
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">Главная страница</h3>
+                        <p class="card__text">
+                            Кратко объясняет назначение ресурса, показывает, кому он полезен, и сразу ведёт к тренажёру.
+                            Это точка входа для нового пользователя.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Теоретический раздел</h3>
+                        <p class="card__text">
+                            Содержит основные определения, логические операции, примеры таблиц истинности
+                            и ключевые законы булевой алгебры, которые помогают при решении задач.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Страница «О проекте»</h3>
+                        <p class="card__text">
+                            Описывает цель, задачи и структуру сайта, а также поясняет, как тренажёр можно использовать
+                            в учёбе и самоподготовке.
+                        </p>
+                    </article>
+                </div>
             </div>
+        </section>
+
+        <section class="section" id="tech">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Как устроен этот сайт внутри</h2>
+                    <p class="section__subtitle">
+                        Технологии подобраны так, чтобы сайт был лёгким, быстрым и понятным, без лишних зависимостей.
+                    </p>
+                </header>
+
+                <div class="about-layout">
+                    <div class="card">
+                        <h3 class="card__title">Используемые технологии</h3>
+                        <ul class="about-tags">
+                            <li>HTML5 — структура страниц и семантика.</li>
+                            <li>CSS3 — оформление, адаптивный дизайн, тёмная и светлая темы.</li>
+                            <li>Vanilla JavaScript — логика работы тренажёра и статистики.</li>
+                        </ul>
+                        <p class="card__text">
+                            Отсутствие тяжёлых фреймворков упрощает поддержку и делает проект понятнее как учебный
+                            пример.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Особенности реализации</h3>
+                        <ul class="about-tags">
+                            <li>Оформление через CSS-переменные для быстрого переключения темы.</li>
+                            <li>Разделение стилей на базовые и адаптивные файлы.</li>
+                            <li>Чёткая структура: отдельные файлы для логики тренажёра и общих скриптов.</li>
+                        </ul>
+                        <p class="card__text">
+                            Такой подход можно использовать как основу для других учебных проектов: достаточно заменить
+                            тему
+                            и предметную область.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="usage">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Как можно использовать тренажёр</h2>
+                    <p class="section__subtitle">
+                        Проект задуман не только как демонстрация навыков вёрстки и разработки, но и как инструмент,
+                        который действительно можно использовать в учёбе.
+                    </p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">На занятиях</h3>
+                        <p class="card__text">
+                            Преподаватель может разбирать выражения фронтально, а затем предложить студентам
+                            потренироваться
+                            на собственных наборах примеров.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Для самоподготовки</h3>
+                        <p class="card__text">
+                            Ученик может открыть сайт из дома, повторить теорию и решить несколько примеров перед
+                            контрольной
+                            или зачётом.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card__title">Как пример проекта</h3>
+                        <p class="card__text">
+                            Сайт можно показывать как пример учебной работы по веб-разработке: в нём есть дизайн,
+                            адаптив, логика и понятное назначение.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
+            <a href="404.html" class="footer__link">Проверка страницы 404</a>
         </div>
-    </section>
+    </footer>
 
-</main>
-
-<footer class="footer">
-    <div class="container footer__inner">
-        <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
-        <a href="404.html" class="footer__link">Проверка страницы 404</a>
-    </div>
-</footer>
-
-<script src="js/trainer-logic.js"></script>
-<script src="js/main.js"></script>
+    <script src="js/trainer-logic.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>

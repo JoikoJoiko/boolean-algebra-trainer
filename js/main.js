@@ -1,16 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('themeToggle');
-  if (!toggle) return;
+
+  const applySavedTheme = () => {
+    const saved = localStorage.getItem('bt_theme');
+    const root = document.documentElement;
+    if (saved === 'light') {
+      root.classList.add('page--light');
+    } else {
+      root.classList.remove('page--light');
+    }
+  };
 
   const updateText = () => {
-    const isLight = document.body.classList.contains('page--light');
+    if (!toggle) return;
+    const isLight = document.documentElement.classList.contains('page--light');
     toggle.textContent = isLight ? 'Тёмная тема' : 'Светлая тема';
   };
 
+  applySavedTheme();
+  updateText();
+
+  if (!toggle) return;
+
   toggle.addEventListener('click', () => {
-    document.body.classList.toggle('page--light');
+    const root = document.documentElement;
+    const isLight = root.classList.toggle('page--light');
+    localStorage.setItem('bt_theme', isLight ? 'light' : 'dark');
     updateText();
   });
-
-  updateText();
 });

@@ -23,16 +23,16 @@
 
 body.page--light {
   --bg-main: #F5F6FB;
-  --bg-card: #FFFFFF;
-  --bg-secondary: #ECEFFF;
+  --bg-card: #ffffff;
+  --bg-secondary: #f2f3ff;
 
   --accent: #7C5CFF;
   --accent-hover: #5E45E6;
-  --accent-soft: rgba(124, 92, 255, 0.1);
+  --accent-soft: rgba(124, 92, 255, 0.08);
 
-  --text-main: #141622;
-  --text-muted: #555A72;
-  --border: #D5D8EA;
+  --text-main: #161827;
+  --text-muted: #6b6f85;
+  --border: #d6d8ea;
 
   --success: #1EAD6A;
   --error: #E53955;
