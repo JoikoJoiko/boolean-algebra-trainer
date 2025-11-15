@@ -1,56 +1,341 @@
+/* =========================
+   ДО 1199px — ПЛАНШЕТЫ / НЕБОЛЬШИЕ НОУТЫ
+   ========================= */
+
 @media (max-width: 1199px) {
+  /* Контейнер чуть посвободнее можно оставить как есть, паддинги снизу */
+
+  /* HERO */
   .hero__inner {
     grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 
   .hero__preview {
     justify-content: flex-start;
-    margin-top: 12px;
+    margin-top: 8px;
   }
 
+  .hero--index {
+    min-height: auto;
+    padding: 72px 0 56px;
+  }
+
+  /* Секции с карточками */
+  .grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Старый простой тренажёр */
   .trainer {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .grid--3 {
+  /* Новый тренажёр: три колонки превращаем в две/одну */
+  .section--trainer {
+    min-height: auto;
+    align-items: flex-start;
+  }
+
+  .trainer-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .trainer-layout__left {
+    order: 1;
+  }
+
+  .trainer-layout__center {
+    order: 2;
+  }
+
+  .trainer-main-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trainer-gates__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Теория / About */
+  .theory-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 404 чуть компактнее */
+  .notfound {
+    padding: 72px 0;
+  }
 }
+
+/* =========================
+   ДО 767px — МОБИЛЬНЫЕ
+   ========================= */
 
 @media (max-width: 767px) {
   .container {
     padding: 0 14px;
   }
 
+  /* Шапка */
   .header__inner {
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 14px;
   }
 
   .nav {
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
+    gap: 8px;
   }
 
+  .nav__link {
+    padding-inline: 10px;
+    font-size: 13px;
+  }
+
+  .theme-toggle {
+    align-self: flex-start;
+  }
+
+  /* HERO */
   .hero {
     padding-top: 18px;
+    padding-bottom: 40px;
+  }
+
+  .hero--index {
+    padding: 52px 0 40px;
   }
 
   .hero__inner {
     gap: 16px;
   }
 
+  .hero__title {
+    font-size: clamp(26px, 7vw, 32px);
+  }
+
+  .hero__subtitle {
+    font-size: 14px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__meta {
+    gap: 6px;
+  }
+
+  .hero__preview {
+    margin-top: 4px;
+  }
+
+  .hero-card {
+    max-width: 100%;
+  }
+
+  /* Секции / карточки */
+  .section {
+    padding: 40px 0;
+  }
+
   .grid--3 {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .card {
+    padding: 20px 18px;
+  }
+
+  .section__title {
+    font-size: 20px;
+  }
+
+  .section__subtitle {
+    font-size: 13px;
+  }
+
+  /* Старый тренажёр */
   .trainer__row {
     flex-direction: column;
   }
 
+  .trainer__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* НОВЫЙ тренажёр */
+
+  .trainer-shell {
+    gap: 16px;
+  }
+
+  .trainer-layout {
+    gap: 16px;
+  }
+
+  .trainer-modes {
+    align-self: stretch;
+    justify-content: space-between;
+  }
+
+  .trainer-modes__tab {
+    flex: 1 1 0;
+    text-align: center;
+    padding-inline: 10px;
+  }
+
+  .trainer-panel {
+    padding: 14px 12px;
+  }
+
+  .level-list__item {
+    padding: 9px 9px 8px;
+  }
+
+  .trainer-card__title {
+    font-size: 15px;
+  }
+
+  .trainer-card__story {
+    font-size: 12px;
+  }
+
+  .trainer-main-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .trainer-board__dropzone {
+    min-height: 100px;
+    padding: 10px;
+  }
+
+  .trainer-gates__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trainer-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trainer-inputs__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trainer-input-item {
+    min-width: 0;
+  }
+
+  .trainer-wires__list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .truth-table {
+    font-size: 11px;
+  }
+
+  /* Теория / About */
+  .theory-layout,
+  .about-layout {
+    gap: 16px;
+  }
+
+  .theory-table-head {
+    font-size: 12px;
+  }
+
+  .theory-row {
+    grid-template-columns: repeat(auto-fit, minmax(32px, 1fr));
+  }
+
+  /* Подвал */
   .footer__inner {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .footer__inner > *:not(:last-child) {
+    margin-bottom: 4px;
+  }
+
+  /* 404 */
+  .notfound {
+    padding: 52px 0;
+  }
+
+  .notfound__code {
+    font-size: 64px;
+  }
+
+  .notfound__title {
+    font-size: 24px;
+  }
+
+  .notfound__text {
+    font-size: 14px;
+  }
 }
+@media (max-width: 767px) {
+  .header__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .header__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .nav__link {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .theme-toggle {
+    align-self: flex-end;
+  }
+}
+@media (max-width: 767px) {
+    .hero--index::after {
+        opacity: 0.12;
+        background-position: center bottom;
+        background-size: 60%;
+        transform: none;
+    }
+
+    .hero--index::before {
+        display: none;
+    }
+}
+

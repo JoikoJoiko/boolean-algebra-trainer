@@ -38,7 +38,7 @@
         })();
     </script>
 
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="img/content/icon.png">
 </head>
 
 <body class="page">
@@ -52,8 +52,26 @@
                 <a href="about.html" class="nav__link">О проекте</a>
             </nav>
 
-            <button class="theme-toggle" type="button" id="themeToggle">
-                Светлая тема
+            <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <g>
+                        <line x1="12" y1="2" x2="12" y2="5"></line>
+                        <line x1="12" y1="19" x2="12" y2="22"></line>
+                        <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
+                        <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
+                        <line x1="2" y1="12" x2="5" y2="12"></line>
+                        <line x1="19" y1="12" x2="22" y2="12"></line>
+                        <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
+                        <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
+                    </g>
+                </svg>
+
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 0 1 11.2 3
+               7 7 0 1 0 21 12.8z">
+                    </path>
+                </svg>
             </button>
         </div>
     </header>
@@ -83,48 +101,6 @@
                         <span class="hero-tag">Тренажёр для учёбы и практики</span>
                         <span class="hero-tag">Подходит для школьников и студентов</span>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ДЛЯ КОГО -->
-        <section class="section section--cards" id="audience">
-            <div class="container">
-                <header class="section__header section__header--center">
-                    <h2 class="section__title">Для кого этот тренажёр</h2>
-                    <p class="section__subtitle">
-                        Проект можно использовать как образовательный инструмент на занятиях и в самостоятельной
-                        подготовке.
-                    </p>
-                </header>
-
-                <div class="grid grid--3">
-                    <article class="card card--highlight">
-                        <div class="card__eyebrow">Учёба</div>
-                        <h3 class="card__title">Школьники и студенты</h3>
-                        <p class="card__text">
-                            Помогает тренировать логику перед контрольными, зачётами и экзаменами по информатике
-                            и дискретной математике.
-                        </p>
-                    </article>
-
-                    <article class="card card--highlight">
-                        <div class="card__eyebrow">Преподавание</div>
-                        <h3 class="card__title">Преподаватели</h3>
-                        <p class="card__text">
-                            Можно использовать как наглядный пример на занятиях или как дополнительный
-                            интерактивный материал для разбора тем.
-                        </p>
-                    </article>
-
-                    <article class="card card--highlight">
-                        <div class="card__eyebrow">Саморазвитие</div>
-                        <h3 class="card__title">Самостоятельное обучение</h3>
-                        <p class="card__text">
-                            Удобный способ отрабатывать навыки работы с булевой алгеброй без установки
-                            отдельного программного обеспечения.
-                        </p>
-                    </article>
                 </div>
             </div>
         </section>
@@ -366,48 +342,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- КАК УСТРОЕН ТРЕНАЖЁР -->
-        <section class="section section--cards">
-            <div class="container">
-                <header class="section__header section__header--center">
-                    <h2 class="section__title">Как устроен тренажёр</h2>
-                    <p class="section__subtitle">
-                        Структура интерфейса и логики, которую можно подробно описать в пояснительной записке.
-                    </p>
-                </header>
-
-                <div class="grid grid--3">
-                    <article class="card card--highlight">
-                        <div class="card__eyebrow">Шаг 1</div>
-                        <h3 class="card__title">Выбор значений</h3>
-                        <p class="card__text">
-                            Пользователь выбирает значения переменных A, B, C и ожидаемый результат выражения (0 или 1),
-                            опираясь на свои знания.
-                        </p>
-                    </article>
-
-                    <article class="card card--highlight">
-                        <div class="card__eyebrow">Шаг 2</div>
-                        <h3 class="card__title">Проверка выражения</h3>
-                        <p class="card__text">
-                            Скрипт вычисляет значение логического выражения по заданным переменным и сравнивает его
-                            с ответом пользователя.
-                        </p>
-                    </article>
-
-                    <article class="card card--highlight">
-                        <div class="card__eyebrow">Шаг 3</div>
-                        <h3 class="card__title">Анализ прогресса</h3>
-                        <p class="card__text">
-                            В правом блоке отображается статистика: количество примеров, число верных решений и процент
-                            успешности за текущую сессию.
-                        </p>
-                    </article>
                 </div>
             </div>
         </section>

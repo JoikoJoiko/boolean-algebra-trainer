@@ -7,25 +7,31 @@ document.addEventListener('DOMContentLoaded', function () {
     return root.classList.contains('page--light');
   }
 
-  function updateToggleText() {
+  function updateToggleAria() {
     if (!toggle) return;
-    toggle.textContent = isLight() ? 'Тёмная тема' : 'Светлая тема';
+    toggle.setAttribute(
+      'aria-label',
+      isLight() ? 'Включить тёмную тему' : 'Включить светлую тему'
+    );
   }
 
   if (toggle) {
     toggle.addEventListener('click', function () {
       var nextIsLight = !isLight();
 
+      // переключаем класс на <html>
       root.classList.toggle('page--light', nextIsLight);
 
+      // пишем в localStorage
       try {
         localStorage.setItem(THEME_KEY, nextIsLight ? 'light' : 'dark');
-      } catch (e) {
-      }
+      } catch (e) {}
 
-      updateToggleText();
+      // обновляем aria-label
+      updateToggleAria();
     });
   }
 
-  updateToggleText();
+  // при первом запуске просто проставляем aria-label
+  updateToggleAria();
 });

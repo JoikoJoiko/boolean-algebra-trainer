@@ -40,6 +40,7 @@ body.page {
     backdrop-filter: blur(16px);
     background: linear-gradient(to bottom, rgba(11, 13, 20, 0.96), rgba(11, 13, 20, 0.78), transparent);
     border-bottom: 1px solid rgba(36, 40, 58, 0.7);
+    padding: 12px 0;
 }
 
 .header__inner {
@@ -78,27 +79,50 @@ body.page {
     color: var(--text-main);
 }
 
-.theme-toggle {
-    font-size: 12px;
-    padding: 6px 14px;
+/* Тоггл темы — иконка солнца / луны */
+
+ .theme-toggle {
+    border: none;
+    background: transparent;
+    padding: 4px;
     border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(11, 13, 20, 0.6);
-    color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    white-space: nowrap;
-    transition:
-        background var(--transition-fast),
-        color var(--transition-fast),
-        border-color var(--transition-fast),
-        transform var(--transition-fast);
+    transition: background 0.18s ease-out, transform 0.18s ease-out;
 }
 
 .theme-toggle:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
 }
+
+.page--light .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    display: none;
+    stroke: var(--text-main);
+    fill: none;
+    stroke-width: 1.6;
+}
+
+/* тёмная тема — показываем луну */
+html:not(.page--light) .theme-icon--moon {
+    display: block;
+}
+
+/* светлая тема — показываем солнце */
+.page--light .theme-icon--sun {
+    display: block;
+}
+
 
 /* =========================
    HERO — БАЗА
@@ -245,6 +269,56 @@ body.page {
 .hero--index .hero__meta {
     margin-top: 10px;
 }
+
+.hero--index::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../img/content/bool.png");
+    background-repeat: no-repeat;
+
+    background-position: 78% center;  
+
+    background-size: auto 90%;
+
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 2;
+    transform: none;
+}
+/* тёмная тема — белый портрет */
+html:not(.page--light) .hero--index::after {
+    background-image: url("../img/content/bool2.png");
+}
+
+/* светлая тема — исходный портрет */
+.page--light .hero--index::after {
+    background-image: url("../img/content/bool.png");
+}
+
+.hero--index .hero__inner {
+    position: relative;
+    z-index: 2;
+}
+
+.hero--index::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.32), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0, 189, 214, 0.28), transparent 60%),
+        repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px,
+            transparent 12px
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+
 
 /* =========================
    КНОПКИ
@@ -427,7 +501,6 @@ body.page {
 
 /* =========================
    СТАРЫЙ ПРОСТОЙ ТРЕНАЖЁР
-   (может использоваться где-то ещё)
    ========================= */
 
 .trainer {
@@ -535,7 +608,7 @@ body.page {
 }
 
 /* =========================
-   НОВЫЙ ТРЕНАЖЁР — ОБЩИЙ ЛЭЙАУТ
+   НОВЫЙ ТРЕНАЖЁР — ЛЭЙАУТ
    ========================= */
 
 .section--trainer {
@@ -1295,7 +1368,7 @@ body.page {
     border-top-color: #d6d8ea;
 }
 
-/* Тоггл темы */
+/* Тоггл темы в светлой */
 
 .page--light .theme-toggle {
     background: #ffffff;
@@ -1434,4 +1507,18 @@ body.page {
 .page--light .palette-item__title,
 .page--light .palette-item__desc {
     color: var(--text-main);
+}
+.page--light .theme-icon--sun circle,
+.page--light .theme-icon--sun line,
+.page--light .theme-icon--sun g {
+    stroke: #111111;
+    fill: none;
+}
+.page--light .theme-icon--sun {
+    color: #000;
+}
+
+/* тёмная тема — солнце светлое */
+html:not(.page--light) .theme-icon--sun {
+    color: #fff;
 }

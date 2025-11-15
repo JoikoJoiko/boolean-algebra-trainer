@@ -36,7 +36,7 @@
             }
         })();
     </script>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="img/content/icon.png">
 </head>
 
 <body class="page">
@@ -50,8 +50,26 @@
                 <a href="about.html" class="nav__link">О проекте</a>
             </nav>
 
-            <button class="theme-toggle" type="button" id="themeToggle">
-                Светлая тема
+            <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <g>
+                        <line x1="12" y1="2" x2="12" y2="5"></line>
+                        <line x1="12" y1="19" x2="12" y2="22"></line>
+                        <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
+                        <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
+                        <line x1="2" y1="12" x2="5" y2="12"></line>
+                        <line x1="19" y1="12" x2="22" y2="12"></line>
+                        <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
+                        <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
+                    </g>
+                </svg>
+
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 0 1 11.2 3
+               7 7 0 1 0 21 12.8z">
+                    </path>
+                </svg>
             </button>
         </div>
     </header>
@@ -64,8 +82,9 @@
                     <span class="hero__eyebrow">Теоретический материал</span>
                     <h1 class="hero__title">Основы булевой алгебры простыми словами</h1>
                     <p class="hero__subtitle">
-                        Здесь собрана краткая теория, которая нужна для работы с тренажёром: что такое булева алгебра,
-                        какие бывают логические операции и как читать таблицы истинности.
+                        Здесь собрана основная теория и базовые приёмы решения задач: что такое булева алгебра,
+                        как читаются логические операции, как строить таблицы истинности и как аккуратно считать
+                        значение выражения по наборам.
                     </p>
                     <div class="hero__actions">
                         <a href="index.html#trainer" class="btn btn--primary">Перейти к тренажёру</a>
@@ -86,13 +105,14 @@
             </div>
         </section>
 
+        <!-- Введение -->
         <section class="section" id="intro">
             <div class="container">
                 <header class="section__header section__header--center">
                     <h2 class="section__title">Что такое булева алгебра</h2>
                     <p class="section__subtitle">
-                        Булева алгебра – это раздел математики, в котором все значения принимают только два варианта: 0
-                        или 1.
+                        Булева алгебра – это раздел дискретной математики, в котором все значения принимают только два
+                        варианта: 0 или 1.
                         Обычно 0 понимают как «ложь», а 1 – как «истину».
                     </p>
                 </header>
@@ -109,6 +129,10 @@
                             Поэтому умение читать и преобразовывать логические выражения напрямую помогает лучше
                             понимать программирование
                             и цифровую электронику.
+                        </p>
+                        <p class="card__text">
+                            Логическая функция — это правило, которое по набору входных значений (0 и 1)
+                            выдаёт результат 0 или 1. В задачах это обычно записано как F(A, B, C) или просто F.
                         </p>
                     </div>
 
@@ -128,6 +152,47 @@
             </div>
         </section>
 
+        <!-- Способы записи -->
+        <section class="section" id="notation">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Способы записи логических операций</h2>
+                    <p class="section__subtitle">
+                        В разных задачах одни и те же операции могут обозначаться по-разному. Важно понимать, что это
+                        лишь разные записи одной и той же идеи.
+                    </p>
+                </header>
+
+                <div class="theory-layout">
+                    <div class="card theory-list">
+                        <h3 class="card__title">Типичные обозначения</h3>
+                        <ul class="theory-ul">
+                            <li><span class="theory-label">И (конъюнкция):</span> A ∧ B, A · B, A&B, AND(A, B).</li>
+                            <li><span class="theory-label">ИЛИ (дизъюнкция):</span> A ∨ B, A + B, A|B, OR(A, B).</li>
+                            <li><span class="theory-label">НЕ (отрицание):</span> ¬A, <span style="text-decoration:overline;">A</span>, !A, NOT(A).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Как это читать</h3>
+                        <p class="card__text">
+                            Главное — всегда переводить запись на обычный язык:
+                        </p>
+                        <ul class="theory-ul">
+                            <li>A ∧ B — «A И B одновременно истинны».</li>
+                            <li>A ∨ B — «истинно A, или B, или оба сразу».</li>
+                            <li>¬A — «не A», «A ложно».</li>
+                        </ul>
+                        <p class="card__text">
+                            Если в задаче встретилась незнакомая запись, обычно рядом в условии есть пояснение.
+                            Если нет — можно свериться с этой таблицей.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Базовые операции -->
         <section class="section" id="ops">
             <div class="container">
                 <header class="section__header section__header--center">
@@ -179,6 +244,70 @@
             </div>
         </section>
 
+        <!-- Дополнительные операции -->
+        <section class="section" id="extra-ops">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Дополнительные логические операции</h2>
+                    <p class="section__subtitle">
+                        В некоторых задачах встречаются операции, которые можно выразить через И, ИЛИ и НЕ,
+                        но удобнее рассматривать их отдельно.
+                    </p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <h3 class="card__title">Импликация (ЕСЛИ…ТО)</h3>
+                        <p class="card__text">
+                            Обозначение: A → B. Читается как «если A, то B». Ложно только в случае A = 1 и B = 0.
+                        </p>
+                        <div class="theory-table">
+                            <div class="theory-row"><span>0 → 0 =</span><span>1</span></div>
+                            <div class="theory-row"><span>0 → 1 =</span><span>1</span></div>
+                            <div class="theory-row"><span>1 → 0 =</span><span>0</span></div>
+                            <div class="theory-row"><span>1 → 1 =</span><span>1</span></div>
+                        </div>
+                        <p class="card__text">
+                            Можно выразить через базовые операции: A → B = ¬A ∨ B.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">Эквивалентность (РАВНОСИЛЬНО)</h3>
+                        <p class="card__text">
+                            Обозначение: A ↔ B, A ≡ B. Результат 1, если A и B одинаковы (оба 0 или оба 1).
+                        </p>
+                        <div class="theory-table">
+                            <div class="theory-row"><span>0 ↔ 0 =</span><span>1</span></div>
+                            <div class="theory-row"><span>0 ↔ 1 =</span><span>0</span></div>
+                            <div class="theory-row"><span>1 ↔ 0 =</span><span>0</span></div>
+                            <div class="theory-row"><span>1 ↔ 1 =</span><span>1</span></div>
+                        </div>
+                        <p class="card__text">
+                            Можно выразить, например, так: A ↔ B = (A ∧ B) ∨ (¬A ∧ ¬B).
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3 class="card__title">Исключающее ИЛИ (строго одно)</h3>
+                        <p class="card__text">
+                            Обозначение: A ⊕ B, XOR. Результат 1, если ровно один из аргументов равен 1.
+                        </p>
+                        <div class="theory-table">
+                            <div class="theory-row"><span>0 ⊕ 0 =</span><span>0</span></div>
+                            <div class="theory-row"><span>0 ⊕ 1 =</span><span>1</span></div>
+                            <div class="theory-row"><span>1 ⊕ 0 =</span><span>1</span></div>
+                            <div class="theory-row"><span>1 ⊕ 1 =</span><span>0</span></div>
+                        </div>
+                        <p class="card__text">
+                            Через базовые операции: A ⊕ B = (A ∨ B) ∧ ¬(A ∧ B).
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Таблица истинности -->
         <section class="section" id="truth-table">
             <div class="container">
                 <header class="section__header section__header--center">
@@ -226,9 +355,82 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="theory-layout" style="margin-top:24px;">
+                    <div class="card">
+                        <h3 class="card__title">Как построить таблицу истинности</h3>
+                        <ol class="theory-ol">
+                            <li>Определи количество переменных (например, A, B, C — это 3 переменные).</li>
+                            <li>Перечисли все возможные наборы нулей и единиц. Для n переменных будет 2ⁿ строк.</li>
+                            <li>Добавь столбцы для промежуточных подвыражений (например, ¬C, B ∧ ¬C).</li>
+                            <li>В каждой строке последовательно посчитай значения в этих столбцах.</li>
+                            <li>В последнем столбце запиши значение всей функции F.</li>
+                        </ol>
+                        <p class="card__text">
+                            Такой подход удобно переносится и в тренажёр: по сути, ты делаешь то же самое, только
+                            «в уме» или на черновике.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Типичная задача</h3>
+                        <p class="card__text">
+                            «По таблице истинности найти значения переменных, при которых F = 1» или наоборот — найти F
+                            по заданным A, B, C.
+                        </p>
+                        <p class="card__text">
+                            Алгоритм один: смотри на строку с нужными A, B, C и считай значение выражения по шагам,
+                            учитывая приоритет операций.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Приоритет операций -->
+        <section class="section" id="priority">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Порядок выполнения операций</h2>
+                    <p class="section__subtitle">
+                        Чтобы правильно считать выражение, важно знать, какая операция делается раньше, а какая —
+                        позже. Скобки всегда главнее всех.
+                    </p>
+                </header>
+
+                <div class="theory-layout">
+                    <div class="card">
+                        <h3 class="card__title">Приоритет без скобок</h3>
+                        <ol class="theory-ol">
+                            <li><strong>Отрицание</strong> (НЕ, ¬A, !A).</li>
+                            <li><strong>Конъюнкция</strong> (И, ∧, &).</li>
+                            <li><strong>Дизъюнкция и XOR</strong> (ИЛИ, ∨, +, ⊕).</li>
+                            <li><strong>Импликация и эквивалентность</strong> (→, ↔).</li>
+                        </ol>
+                        <p class="card__text">
+                            Выражение ¬A ∨ B ∧ C нужно читать как (¬A) ∨ (B ∧ C), а не как ¬(A ∨ B) ∧ C.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">Скобки всегда сильнее</h3>
+                        <p class="card__text">
+                            Если есть сомнения — ставь дополнительные скобки. Записи
+                        </p>
+                        <ul class="theory-ul">
+                            <li>F = (A ∨ B) ∧ ¬C</li>
+                            <li>F = A ∨ (B ∧ ¬C)</li>
+                        </ul>
+                        <p class="card__text">
+                            означают разные функции, и это часто суть задачи: увидеть, <em>как именно</em> сгруппированы
+                            операции.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Законы -->
         <section class="section" id="laws">
             <div class="container">
                 <header class="section__header section__header--center">
@@ -248,18 +450,123 @@
                             <li><span class="theory-label">Закон нуля:</span> A ∧ 0 = 0, A ∨ 1 = 1.</li>
                             <li><span class="theory-label">Идемпотентность:</span> A ∧ A = A, A ∨ A = A.</li>
                             <li><span class="theory-label">Закон двойного отрицания:</span> ¬(¬A) = A.</li>
+                            <li><span class="theory-label">Законы дополнения:</span> A ∨ ¬A = 1, A ∧ ¬A = 0.</li>
                         </ul>
                     </div>
 
                     <div class="card theory-list">
+                        <h3 class="card__title">Коммутативность и ассоциативность</h3>
+                        <ul class="theory-ul">
+                            <li><span class="theory-label">Коммутативность:</span> A ∧ B = B ∧ A, A ∨ B = B ∨ A.</li>
+                            <li><span class="theory-label">Ассоциативность:</span> (A ∧ B) ∧ C = A ∧ (B ∧ C).</li>
+                            <li>A ∨ (B ∨ C) = (A ∨ B) ∨ C.</li>
+                        </ul>
+                        <p class="card__text">
+                            Благодаря этим законам можно менять местами и по-другому группировать одинаковые операции
+                            без изменения смысла выражения.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="theory-layout" style="margin-top:24px;">
+                    <div class="card theory-list">
                         <h3 class="card__title">Дистрибутивность и законы де Моргана</h3>
                         <ul class="theory-ul">
-                            <li><span class="theory-label">Дистрибутивность:</span> A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C).
-                            </li>
-                            <li>A ∨ (B ∧ C) = (A ∨ B) ∧ (A ∨ C).</li>
-                            <li><span class="theory-label">Законы де Моргана:</span> ¬(A ∧ B) = ¬A ∨ ¬B.</li>
-                            <li>¬(A ∨ B) = ¬A ∧ ¬B.</li>
+                            <li><span class="theory-label">Дистрибутивность И относительно ИЛИ:</span><br>
+                                A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C).</li>
+                            <li><span class="theory-label">Дистрибутивность ИЛИ относительно И:</span><br>
+                                A ∨ (B ∧ C) = (A ∨ B) ∧ (A ∨ C).</li>
+                            <li><span class="theory-label">Законы де Моргана:</span><br>
+                                ¬(A ∧ B) = ¬A ∨ ¬B;<br>
+                                ¬(A ∨ B) = ¬A ∧ ¬B.</li>
                         </ul>
+                    </div>
+
+                    <div class="card theory-list">
+                        <h3 class="card__title">Законы поглощения</h3>
+                        <ul class="theory-ul">
+                            <li>A ∨ (A ∧ B) = A.</li>
+                            <li>A ∧ (A ∨ B) = A.</li>
+                        </ul>
+                        <p class="card__text">
+                            Эти законы часто используются, чтобы «выкинуть лишнее» из выражения и сделать его короче.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Как решать задачи -->
+        <section class="section" id="methods">
+            <div class="container">
+                <header class="section__header section__header--center">
+                    <h2 class="section__title">Как решать типичные задачи</h2>
+                    <p class="section__subtitle">
+                        Здесь несколько базовых сценариев, которые чаще всего встречаются в задачах и в тренажёре.
+                    </p>
+                </header>
+
+                <div class="theory-layout">
+                    <div class="card">
+                        <h3 class="card__title">1. Посчитать значение выражения при заданных A, B, C…</h3>
+                        <ol class="theory-ol">
+                            <li>Аккуратно перепиши выражение, при необходимости расставь дополнительные скобки.</li>
+                            <li>Подставь в него значения переменных (0 и 1).</li>
+                            <li>Сначала выполни все отрицания (¬A, ¬B и т.п.).</li>
+                            <li>Затем выполни все операции И (∧), потом ИЛИ (∨, ⊕), затем → и ↔.</li>
+                            <li>Повтори для всех наборов, если нужно несколько значений.</li>
+                        </ol>
+                        <p class="card__text">
+                            Точно так же работает тренажёр: он просто автоматизирует эти шаги.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">2. Работа по таблице истинности</h3>
+                        <p class="card__text">
+                            Частая формулировка: «найти строки, в которых F = 1» или «указать наборы, при которых F = 0».
+                        </p>
+                        <ol class="theory-ol">
+                            <li>Смотри на столбец F и отмечай нужные строки.</li>
+                            <li>Для каждой строки выписывай соответствующие значения A, B, C…</li>
+                            <li>При необходимости по этим строкам можно восстановить выражение или проверить ответ.</li>
+                        </ol>
+                        <p class="card__text">
+                            Если тренажёр даёт тебе набор и просит ответ — по сути, он даёт одну строку таблицы
+                            истинности.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="theory-layout" style="margin-top:24px;">
+                    <div class="card">
+                        <h3 class="card__title">3. Упрощение выражений по законам</h3>
+                        <p class="card__text">
+                            Иногда выражение можно сильно сократить, прежде чем считать его по наборам. Для этого и
+                            нужны законы булевой алгебры.
+                        </p>
+                        <ul class="theory-ul">
+                            <li>Ищи повторы вида A ∨ (A ∧ B) или A ∧ (A ∨ B) — применяй поглощение.</li>
+                            <li>Используй A ∨ ¬A = 1 и A ∧ ¬A = 0, если встречаются такие пары.</li>
+                            <li>Применяй законы де Моргана, чтобы «снять» отрицание со скобок.</li>
+                        </ul>
+                        <p class="card__text">
+                            Для тренажёра упрощение не обязательно, но для олимпиадных и экзаменационных задач это
+                            сильно экономит время.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card__title">4. Типичные ошибки</h3>
+                        <ul class="theory-ul">
+                            <li>Игнорирование приоритета операций (сначала всегда НЕ, потом И, потом ИЛИ).</li>
+                            <li>Потеря скобок при переписывании выражения.</li>
+                            <li>Смешивание разных обозначений (например, забыть, что !A — это то же, что ¬A).</li>
+                            <li>Неполная таблица истинности (пропущены некоторые наборы значений).</li>
+                        </ul>
+                        <p class="card__text">
+                            Если ответ «странный», первым делом проверь скобки и порядок действий.
+                        </p>
                     </div>
                 </div>
             </div>
