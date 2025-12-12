@@ -2,6 +2,8 @@
   --bg-main: #0B0D14;
   --bg-card: #11141E;
   --bg-secondary: #161A28;
+  --bg-graient: radial-gradient(circle at top left, rgba(124, 92, 255, 0.12), transparent 60%),
+        rgba(7, 9, 20, 0.9);
 
   --accent: #7C5CFF;
   --accent-hover: #A68FFF;
@@ -21,10 +23,16 @@
   --transition-fast: 0.2s ease-out;
 }
 
-body.page--light {
+html.page--light {
   --bg-main: #F5F6FB;
   --bg-card: #ffffff;
   --bg-secondary: #f2f3ff;
+  --bg-graient: radial-gradient(
+      circle at top left,
+      rgba(220, 213, 251, 0.12),
+      transparent 60%
+    ),
+    rgba(145, 160, 247, 0.9);
 
   --accent: #7C5CFF;
   --accent-hover: #5E45E6;
@@ -37,3 +45,4 @@ body.page--light {
   --success: #1EAD6A;
   --error: #E53955;
 }
+

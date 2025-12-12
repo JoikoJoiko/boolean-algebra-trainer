@@ -378,6 +378,7 @@ html:not(.page--light) .hero--index::after {
 }
 
 .btn--secondary:hover {
+    background: var(--accent-soft);
     border-color: var(--accent);
 }
 
@@ -557,15 +558,33 @@ html:not(.page--light) .hero--index::after {
     padding: 8px 12px;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: #070914;
+    background: var(--bg-secondary);
     color: var(--text-main);
     font-size: 13px;
     outline: none;
 }
 
-.field__control:focus {
+/* Базовый стиль для всех контролов в field */
+.field__control input,
+.field__control select {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    appearance: none;
+}
+
+/* hover / focus — одинаково для input и select */
+.field__control input:hover,
+.field__control select:hover,
+.field__control input:focus,
+.field__control select:focus {
     border-color: var(--accent);
 }
+
 
 .trainer__buttons {
     display: flex;
@@ -696,7 +715,6 @@ html:not(.page--light) .hero--index::after {
     padding: 10px 10px 9px;
     border-radius: 10px;
     border: 1px solid var(--border);
-    background: rgba(7, 9, 20, 0.9);
     cursor: pointer;
     transition:
         border-color var(--transition-fast),
@@ -871,13 +889,12 @@ html:not(.page--light) .hero--index::after {
 .palette-item {
     border-radius: 10px;
     border: 1px solid var(--border);
-    background: rgba(7, 9, 20, 0.9);
     padding: 6px 10px;
     font-size: 11px;
     cursor: grab;
+    background: var(--bg-card);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 2px;
     transition:
         background var(--transition-fast),
@@ -886,26 +903,16 @@ html:not(.page--light) .hero--index::after {
         box-shadow var(--transition-fast);
 }
 
-.palette-item:active {
-    cursor: grabbing;
-}
-
-.palette-item__title {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 11px;
-}
-
+.palette-item__title,
 .palette-item__desc {
-    font-size: 10px;
     color: var(--text-muted);
 }
 
 .palette-item:hover {
-    border-color: var(--accent);
     background: var(--accent-soft);
-    transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent);
 }
+
 
 /* доска (dropzone) */
 
@@ -926,9 +933,7 @@ html:not(.page--light) .hero--index::after {
     border: 1px dashed var(--border);
     padding: 12px;
     min-height: 120px;
-    background:
-        radial-gradient(circle at top left, rgba(124, 92, 255, 0.12), transparent 60%),
-        rgba(7, 9, 20, 0.9);
+    background: var(--bg-gradient);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1415,12 +1420,6 @@ html:not(.page--light) .hero--index::after {
     color: #626782;
 }
 
-/* Поля ввода */
-
-.page--light .field__control {
-    background: #ffffff;
-}
-
 /* Кнопки в светлой теме */
 
 .page--light .btn--primary {
@@ -1499,15 +1498,6 @@ html:not(.page--light) .hero--index::after {
 
 /* Палитра блоков — текст всегда читаемый */
 
-.palette-item__title,
-.palette-item__desc {
-    color: var(--text-main);
-}
-
-.page--light .palette-item__title,
-.page--light .palette-item__desc {
-    color: var(--text-main);
-}
 .page--light .theme-icon--sun circle,
 .page--light .theme-icon--sun line,
 .page--light .theme-icon--sun g {
@@ -1521,4 +1511,45 @@ html:not(.page--light) .hero--index::after {
 /* тёмная тема — солнце светлое */
 html:not(.page--light) .theme-icon--sun {
     color: #fff;
+}
+
+.page--light .palette-item {
+    background: #ffffff;
+    border-color: #d6d8ea;
+}
+
+.page--light .palette-item__title {
+    color: #191b2b;
+}
+
+.page--light .palette-item__desc {
+    color: #626782;
+}
+
+.page--light .palette-item:hover {
+    background: rgba(124, 92, 255, 0.12);
+    border-color: var(--accent);
+}
+
+.page--light .btn--secondary {
+    background: #ffffff;
+    color: #191b2b;
+    border-color: #d6d8ea;
+}
+
+.page--light .btn--secondary:hover {
+    background: rgba(124, 92, 255, 0.12);
+    border-color: var(--accent);
+}
+
+.page--light .btn {
+    color: #191b2b;
+}
+
+.trainer-hint-btn {
+    color: var(--text-muted);
+}
+
+.trainer-hint-btn:hover {
+    color: var(--text-main);
 }
