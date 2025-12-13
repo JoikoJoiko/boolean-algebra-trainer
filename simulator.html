@@ -1,334 +1,216 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Тренажёр — Тренажёр по булевой алгебре</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Тренажёр — Тренажёр по булевой алгебре</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
-        rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/adaptive.css">
-    <script>
-        (function () {
-            var THEME_KEY = 'bat_theme';
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/adaptive.css">
 
-            try {
-                var saved = localStorage.getItem(THEME_KEY);
-                var prefersLight =
-                    window.matchMedia &&
-                    window.matchMedia('(prefers-color-scheme: light)').matches;
+  <script>
+    (function () {
+      var THEME_KEY = 'bat_theme';
+      try {
+        var saved = localStorage.getItem(THEME_KEY);
+        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        var isLight = saved === 'light' || (saved === null && prefersLight);
+        if (isLight) document.documentElement.classList.add('page--light');
+        else document.documentElement.classList.remove('page--light');
+      } catch (e) {}
+    })();
+  </script>
 
-                var isLight = saved === 'light' || (saved === null && prefersLight);
-
-                if (isLight) {
-                    document.documentElement.classList.add('page--light');
-                } else {
-                    document.documentElement.classList.remove('page--light');
-                }
-            } catch (e) {
-            }
-        })();
-    </script>
-    <link rel="icon" type="image/svg+xml" href="img/content/icon.png">
+  <link rel="icon" type="image/png" href="img/content/icon.png">
 </head>
 
 <body class="page">
-    <header class="header">
-        <div class="container header__inner">
-            <div class="logo">BoolTrainer</div>
+<header class="header">
+  <div class="container header__inner">
+    <div class="logo">BoolTrainer</div>
 
-            <nav class="nav">
-                <a href="index.html" class="nav__link">Главная</a>
-                <a href="theory.html" class="nav__link">Теория</a>
-                <a href="simulator.html" class="nav__link nav__link--active">Тренажёр</a>
-            </nav>
+    <nav class="nav">
+      <a href="index.html" class="nav__link">Главная</a>
+      <a href="theory.html" class="nav__link">Теория</a>
+      <a href="simulator.html" class="nav__link nav__link--active">Тренажёр</a>
+    </nav>
 
-            <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
-                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <g>
-                        <line x1="12" y1="2" x2="12" y2="5"></line>
-                        <line x1="12" y1="19" x2="12" y2="22"></line>
-                        <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
-                        <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
-                        <line x1="2" y1="12" x2="5" y2="12"></line>
-                        <line x1="19" y1="12" x2="22" y2="12"></line>
-                        <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
-                        <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
-                    </g>
-                </svg>
+    <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+      <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <g>
+          <line x1="12" y1="2" x2="12" y2="5"></line>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+          <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
+          <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
+          <line x1="2" y1="12" x2="5" y2="12"></line>
+          <line x1="19" y1="12" x2="22" y2="12"></line>
+          <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
+          <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
+        </g>
+      </svg>
+      <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
 
-                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M21 12.8A9 9 0 0 1 11.2 3
-               7 7 0 1 0 21 12.8z">
-                    </path>
-                </svg>
-            </button>
-        </div>
-    </header>
+<main class="main">
+  <section class="section section--accent section--trainer" id="trainer">
+    <div class="container trainer-v2">
+      <header class="section__header section__header--center">
+        <h2 class="section__title">Интерактивный тренажёр</h2>
+        <p class="section__subtitle">
+          Собери логическую схему: блоки перетаскиваются на доску, соединения рисуются проводами, а проверка
+          идёт через симуляцию всех наборов входов.
+        </p>
+      </header>
 
-    <main class="main">
- <section class="section section--accent section--trainer" id="trainer">
-            <div class="container trainer-shell">
-                <header class="section__header section__header--center">
-                    <h2 class="section__title">Интерактивный тренажёр</h2>
-                    <p class="section__subtitle">
-                        Помоги Анне собрать корректные логические схемы: у неё есть несколько датчиков,
-                        кодовые флаги и даже капризный «рандомный» канал. Нужны такие схемы, чтобы
-                        система доступа открывала дверь только при нужных наборах сигналов.
-                    </p>
-                </header>
+      <!-- один таб, чтобы визуально было как на макете -->
+      <div class="trainer-v2__tabs">
+        <button class="trainer-v2__tab trainer-v2__tab--active" type="button" aria-current="page">Уровни</button>
+      </div>
 
-                <!-- режимы -->
-                <div class="trainer-modes">
-                    <button class="trainer-modes__tab trainer-modes__tab--active" type="button" data-mode="levels">
-                        Уровни
-                    </button>
-                    <button class="trainer-modes__tab" type="button" data-mode="free">
-                        Свободный режим
-                    </button>
+      <div class="trainer-v2__layout">
+        <!-- LEFT -->
+        <aside class="trainer-v2__left">
+          <div class="trainer-v2__panel">
+            <h3 class="trainer-v2__panel-title">История Анны</h3>
+            <p class="trainer-v2__panel-text" id="storyText">
+              Анна тестирует схемы доступа. На каждом уровне есть условия и ограничения. Твоя задача — собрать
+              схему, которая повторяет целевую функцию F.
+            </p>
+
+            <h3 class="trainer-v2__panel-title trainer-v2__panel-title--mt">Уровни</h3>
+            <ul class="trainer-v2__levels" id="levelsList">
+              <!-- JS -->
+            </ul>
+          </div>
+        </aside>
+
+        <!-- RIGHT -->
+        <section class="trainer-v2__right">
+          <div class="trainer-v2__work">
+            <div class="trainer-v2__work-head">
+              <div>
+                <div class="trainer-v2__work-title" id="levelTitle">Уровень — название</div>
+                <div class="trainer-v2__work-sub">
+                  <span class="trainer-v2__work-label">Целевая функция:</span>
+                  <span class="trainer-v2__work-target" id="levelTarget">F = …</span>
                 </div>
+                <div class="trainer-v2__work-task" id="levelTask">Задача…</div>
+              </div>
 
-                <div class="trainer-layout">
-                    <!-- левая колонка: уровни / история -->
-                    <aside class="trainer-layout__left">
-                        <div class="trainer-panel trainer-panel--levels" data-mode-panel="levels">
-                            <h3 class="trainer__stats-title">История Анны</h3>
-                            <p class="trainer-panel__text">
-                                Анна — инженер по тестированию логических схем. На каждом уровне ей задают
-                                условие и ограничивают число входов и блоков. Твоя задача — собрать схему,
-                                которая реализует нужную функцию F.
-                            </p>
-
-                            <h3 class="trainer__stats-title" style="margin-top: 10px;">Уровни</h3>
-                            <ul class="level-list">
-                                <li class="level-list__item level-list__item--active" data-level-id="level1">
-                                    <div class="level-list__title">Уровень 1 — базовое И</div>
-                                    <div class="level-list__meta">
-                                        Дверь открывается, только если сработали оба датчика A и B.
-                                        Входов: 2, блоков максимум: 2.
-                                    </div>
-                                    <div class="level-list__status" data-status="pending">Не пройден</div>
-                                    <div class="level-list__best" data-best-for="level1">Лучшее время: —</div>
-                                </li>
-                                <li class="level-list__item" data-level-id="level2">
-                                    <div class="level-list__title">Уровень 2 — охрана склада</div>
-                                    <div class="level-list__meta">
-                                        Склад открыт, если Анна предъявляет код A и охрана B не заблокировала доступ,
-                                        или есть аварийный пропуск C. Входов: 3, блоков максимум: 3.
-                                    </div>
-                                    <div class="level-list__status" data-status="pending">Не пройден</div>
-                                    <div class="level-list__best" data-best-for="level2">Лучшее время: —</div>
-                                </li>
-                                <li class="level-list__item" data-level-id="level3">
-                                    <div class="level-list__title">Уровень 3 — дата-центр</div>
-                                    <div class="level-list__meta">
-                                        В дата-центр можно войти, если либо Анна, либо оператор запускают доступ (но не
-                                        оба),
-                                        и при этом аварийный датчик C молчит или Анна лично подтверждает вход.
-                                        Входов: 3, блоков максимум: 4.
-                                    </div>
-                                    <div class="level-list__status" data-status="pending">Не пройден</div>
-                                    <div class="level-list__best" data-best-for="level3">Лучшее время: —</div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="trainer-panel trainer-panel--free" data-mode-panel="free" hidden>
-                            <h3 class="trainer__stats-title">Свободный режим</h3>
-                            <p class="trainer-panel__text">
-                                Здесь Анна экспериментирует: добавляет входы, подключает «рандомные» каналы
-                                и проверяет, как ведут себя разные схемы. Можно использовать этот режим
-                                как лабораторию для разбора собственных задач.
-                            </p>
-                        </div>
-                    </aside>
-
-                    <!-- средняя колонка: палитра + доска -->
-                    <div class="trainer-layout__center">
-                        <div class="card trainer-card">
-                            <div class="trainer-card__header">
-                                <div class="trainer-card__header-main">
-                                    <div id="trainerModeLabel" class="trainer-card__mode">Режим: уровни</div>
-                                    <div class="trainer-card__level-row">
-                                        <div id="trainerLevelLabel" class="trainer-card__title">
-                                            Уровень 1 — базовое И
-                                        </div>
-                                        <button class="trainer-hint-btn" type="button" id="toggleHintBtn">
-                                            Показать подсказку
-                                        </button>
-                                    </div>
-                                </div>
-                                <div id="trainerTargetExpr" class="trainer-card__target trainer-card__target--hidden">
-                                    Целевая функция: F = A ∧ B
-                                </div>
-                                <div id="trainerLevelStory" class="trainer-card__story">
-                                    Дверь открывается, только если сработали оба датчика A и B.
-                                </div>
-                            </div>
-
-                            <div class="trainer-card__body">
-                                <div class="trainer-main-grid">
-                                    <!-- слева: палитра + входы + доска -->
-                                    <div class="trainer-main-grid__left">
-                                        <!-- Палитра блоков -->
-                                        <div class="trainer-palette">
-                                            <div class="trainer-palette__header">
-                                                <h3 class="trainer__stats-title">Библиотека блоков</h3>
-                                                <p class="trainer-palette__hint">
-                                                    Перетащи блок на доску ниже или используй кнопку «Добавить блок».
-                                                </p>
-                                            </div>
-                                            <div class="trainer-palette__list">
-                                                <button class="palette-item" type="button" draggable="true"
-                                                    data-gate-type="AND">
-                                                    <span class="palette-item__title">AND</span>
-                                                    <span class="palette-item__desc">И (∧)</span>
-                                                </button>
-                                                <button class="palette-item" type="button" draggable="true"
-                                                    data-gate-type="OR">
-                                                    <span class="palette-item__title">OR</span>
-                                                    <span class="palette-item__desc">ИЛИ (∨)</span>
-                                                </button>
-                                                <button class="palette-item" type="button" draggable="true"
-                                                    data-gate-type="XOR">
-                                                    <span class="palette-item__title">XOR</span>
-                                                    <span class="palette-item__desc">Исключающее ИЛИ (⊕)</span>
-                                                </button>
-                                                <button class="palette-item" type="button" draggable="true"
-                                                    data-gate-type="NOT">
-                                                    <span class="palette-item__title">NOT</span>
-                                                    <span class="palette-item__desc">НЕ (¬)</span>
-                                                </button>
-                                                <button class="palette-item" type="button" draggable="true"
-                                                    data-gate-type="NAND">
-                                                    <span class="palette-item__title">NAND</span>
-                                                    <span class="palette-item__desc">НЕ-И</span>
-                                                </button>
-                                                <button class="palette-item" type="button" draggable="true"
-                                                    data-gate-type="NOR">
-                                                    <span class="palette-item__title">NOR</span>
-                                                    <span class="palette-item__desc">НЕ-ИЛИ</span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <!-- Входные параметры -->
-                                        <div class="trainer-inputs">
-                                            <div class="trainer-inputs__header">
-                                                <h3 class="trainer__stats-title">Входные переменные</h3>
-                                                <button class="btn btn--secondary btn--small" type="button"
-                                                    id="addInputBtn">
-                                                    Добавить вход
-                                                </button>
-                                            </div>
-                                            <div class="trainer__row trainer-inputs__row" id="inputsContainer">
-                                                <!-- рендер из JS -->
-                                            </div>
-                                            <p class="trainer-inputs__hint">
-                                                В свободном режиме можно добавлять/удалять входы и включать режим «rnd»,
-                                                чтобы значение менялось случайно.
-                                            </p>
-                                        </div>
-
-                                        <!-- Доска -->
-                                        <div class="trainer-board">
-                                            <div class="trainer-board__header">
-                                                <h3 class="trainer__stats-title">Доска схемы</h3>
-                                                <button class="btn btn--secondary btn--small" type="button"
-                                                    id="addGateBtn">
-                                                    Добавить блок
-                                                </button>
-                                            </div>
-                                            <div class="trainer-board__dropzone" id="boardDropzone">
-                                                <div class="trainer-board__placeholder" id="boardPlaceholder">
-                                                    Перетащи сюда блоки из библиотеки, чтобы собрать схему.
-                                                </div>
-                                                <div class="trainer-gates__grid" id="gatesContainer">
-                                                    <!-- блоки из JS -->
-                                                </div>
-                                            </div>
-                                            <p class="trainer-gates__note">
-                                                Источники для входов блоков — переменные (A, B, C, …) и выходы других
-                                                блоков.
-                                                Для NOT используется только первый вход.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- справа: соединения, таймер, результат -->
-                                    <div class="trainer-main-grid__right">
-                                        <div class="trainer-analysis">
-                                            <h3 class="trainer__stats-title">Анализ схемы</h3>
-
-                                            <div class="trainer-analysis__block">
-                                                <h4 class="trainer-analysis__title">Соединения</h4>
-                                                <div class="trainer-wires__list" id="wiresList">
-                                                    <!-- из JS -->
-                                                </div>
-                                                <p class="trainer-wires__hint">
-                                                    Каждое соединение «источник → блок.вход» отображается здесь.
-                                                </p>
-                                            </div>
-
-                                            <div class="trainer-analysis__block trainer-analysis__block--timer"
-                                                data-mode-panel="levels">
-                                                <div class="trainer-timer">
-                                                    <button class="btn btn--secondary" type="button" id="startLevelBtn">
-                                                        Начать уровень
-                                                    </button>
-                                                    <span class="trainer-timer__label" id="timerLabel">Время:
-                                                        00:00</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="trainer-analysis__block">
-                                                <div class="trainer-actions">
-                                                    <button class="btn btn--primary" type="button" id="trainerCheckBtn"
-                                                        disabled>
-                                                        Проверить схему
-                                                    </button>
-                                                    <button class="btn btn--secondary" type="button"
-                                                        id="trainerResetBtn">
-                                                        Сбросить схему
-                                                    </button>
-                                                </div>
-                                                <div class="trainer-result">
-                                                    <div id="trainerResultMessage" class="trainer-result__message">
-                                                    </div>
-                                                    <div id="trainerTruthTable" class="trainer-result__table"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- /.trainer-main-grid -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <div class="trainer-v2__work-actions">
+                <button class="trainer-v2__hint" type="button" id="hintBtn">подсказка</button>
+              </div>
             </div>
+
+            <!-- palette row like in mock -->
+            <div class="trainer-v2__palette" id="paletteRow">
+              <button class="trainer-v2__chip" draggable="true" data-gate="AND" type="button">AND (∧)</button>
+              <button class="trainer-v2__chip" draggable="true" data-gate="OR" type="button">OR (∨)</button>
+              <button class="trainer-v2__chip" draggable="true" data-gate="NOT" type="button">NOT (¬)</button>
+              <button class="trainer-v2__chip" draggable="true" data-gate="NAND" type="button">NAND (⊼)</button>
+              <button class="trainer-v2__chip" draggable="true" data-gate="XOR" type="button">XOR (⊕)</button>
+              <button class="trainer-v2__chip" draggable="true" data-gate="NOR" type="button">NOR (⊽)</button>
+              <div class="trainer-v2__palette-hint">логические блоки</div>
+            </div>
+
+            <!-- board -->
+            <div class="trainer-v2__board-wrap">
+              <div class="trainer-v2__board" id="board" aria-label="Доска схемы">
+                <!-- svg for wires -->
+                <svg class="trainer-v2__wires" id="wiresSvg" aria-hidden="true"></svg>
+
+                <!-- fixed source -->
+                <div class="node node--fixed node--src" id="srcNode" data-node="src">
+                  <div class="node__title">ист.</div>
+                  <div class="node__ports" id="srcPorts"></div>
+                </div>
+
+                <!-- fixed output -->
+                <div class="node node--fixed node--out" id="outNode" data-node="out">
+                  <div class="node__title">вых.</div>
+                  <div class="node__ports" id="outPorts"></div>
+                </div>
+
+                <!-- dropzone / workspace -->
+                <div class="trainer-v2__workspace" id="workspace">
+                  <div class="trainer-v2__drop-hint" id="dropHint">
+                    Перетащи блоки на доску. Соедини выходы и входы проводами.
+                  </div>
+                  <!-- gate nodes appended here -->
+                </div>
+              </div>
+            </div>
+
+            <!-- bottom: iterations + waves + controls -->
+            <div class="trainer-v2__bottom">
+              <div class="trainer-v2__wave">
+                <div class="trainer-v2__wave-row">
+                  <div class="trainer-v2__wave-label">усл.</div>
+                  <svg class="trainer-v2__wave-svg" id="waveExpected"></svg>
+                </div>
+                <div class="trainer-v2__wave-row">
+                  <div class="trainer-v2__wave-label">вых.</div>
+                  <svg class="trainer-v2__wave-svg" id="waveActual"></svg>
+                </div>
+              </div>
+
+              <div class="trainer-v2__controls">
+                <div class="trainer-v2__controls-top">
+                  <button class="trainer-v2__btn" type="button" id="playBtn" title="Запуск">▶</button>
+                  <button class="trainer-v2__btn" type="button" id="pauseBtn" title="Пауза" disabled>Ⅱ</button>
+                  <button class="trainer-v2__btn trainer-v2__btn--ghost" type="button" id="stopBtn" title="Стоп" disabled>■</button>
+                </div>
+
+                <button class="trainer-v2__btn trainer-v2__btn--wide" type="button" id="truthBtn" disabled>
+                  Табл. истинности
+                </button>
+
+                <div class="trainer-v2__meta">
+                  <div id="resultLine">Результат: —</div>
+                  <div id="timeLine">Время: 00:00</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </section>
-        
-        
+      </div>
+    </div>
+  </section>
+</main>
 
-    </main>
+<footer class="footer">
+  <div class="container footer__inner">
+    <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
+    <a href="404.html" class="footer__link">Проверка страницы 404</a>
+  </div>
+</footer>
 
-    <footer class="footer">
-        <div class="container footer__inner">
-            <span class="footer__text">© 2025, Тренажёр по булевой алгебре</span>
-            <a href="404.html" class="footer__link">Проверка страницы 404</a>
-        </div>
-    </footer>
+<!-- truth modal -->
+<div class="modal" id="truthModal" hidden>
+  <div class="modal__backdrop" data-close="1"></div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="truthTitle">
+    <div class="modal__head">
+      <div class="modal__title" id="truthTitle">Таблица истинности</div>
+      <button class="modal__close" type="button" data-close="1" aria-label="Закрыть">&times;</button>
+    </div>
+    <div class="modal__body" id="truthBody">
+      <!-- JS -->
+    </div>
+  </div>
+</div>
 
-    <script src="js/trainer-logic.js"></script>
-    <script src="js/main.js"></script>
+<script src="js/trainer-logic.js"></script>
+<script src="js/main.js"></script>
 </body>
-
 </html>
