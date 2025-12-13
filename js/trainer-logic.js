@@ -1,7 +1,6 @@
 (function () {
   "use strict";
 
-  // ====== GATES ======
   var GATE_IMPL = {
     AND: function (a, b) { return a & b; },
     OR: function (a, b) { return a | b; },
@@ -12,145 +11,141 @@
   };
 
   var GATE_LABELS = {
-  AND: "AND (∧)",
-  OR: "OR (∨)",
-  XOR: "XOR (⊕)",
-  NAND: "NAND (⊼)",
-  NOR: "NOR (⊽)",
-  NOT: "NOT (¬)"
-};
+    AND: "AND (∧)",
+    OR: "OR (∨)",
+    XOR: "XOR (⊕)",
+    NAND: "NAND (⊼)",
+    NOR: "NOR (⊽)",
+    NOT: "NOT (¬)"
+  };
 
   function gateInCount(type) {
     return type === "NOT" ? 1 : 2;
   }
 
-var LEVELS = [
-  {
-    id: "level1",
-    num: 1,
-    name: "два датчика",
-    task: "Система срабатывает только если оба датчика A и B активны.",
-    targetExpr: "F = A ∧ B",
-    inputs: ["A", "B"],
-    outputs: ["F"],
-    func: v => v.A & v.B
-  },
-  {
-    id: "level2",
-    num: 2,
-    name: "альтернативный доступ",
-    task: "Достаточно активации любого из датчиков A или B.",
-    targetExpr: "F = A ∨ B",
-    inputs: ["A", "B"],
-    outputs: ["F"],
-    func: v => v.A | v.B
-  },
-  {
-    id: "level3",
-    num: 3,
-    name: "запрет",
-    task: "Система активна, если датчик A НЕ активен.",
-    targetExpr: "F = ¬A",
-    inputs: ["A"],
-    outputs: ["F"],
-    func: v => v.A ? 0 : 1
-  },
-  {
-    id: "level4",
-    num: 4,
-    name: "доступ с ограничением",
-    task: "A должен быть активен, а B — выключен.",
-    targetExpr: "F = A ∧ ¬B",
-    inputs: ["A", "B"],
-    outputs: ["F"],
-    func: v => v.A & (v.B ? 0 : 1)
-  },
-  {
-    id: "level5",
-    num: 5,
-    name: "аварийный режим",
-    task: "Доступ разрешён, если A активен или аварийный сигнал C включён, но B выключен.",
-    targetExpr: "F = (A ∨ C) ∧ ¬B",
-    inputs: ["A", "B", "C"],
-    outputs: ["F"],
-    func: v => (v.A | v.C) & (v.B ? 0 : 1)
-  },
+  var LEVELS = [
+    {
+      id: "level1",
+      num: 1,
+      name: "два датчика",
+      task: "Система срабатывает только если оба датчика A и B активны.",
+      targetExpr: "F = A ∧ B",
+      inputs: ["A", "B"],
+      outputs: ["F"],
+      func: function (v) { return v.A & v.B; }
+    },
+    {
+      id: "level2",
+      num: 2,
+      name: "альтернативный доступ",
+      task: "Достаточно активации любого из датчиков A или B.",
+      targetExpr: "F = A ∨ B",
+      inputs: ["A", "B"],
+      outputs: ["F"],
+      func: function (v) { return v.A | v.B; }
+    },
+    {
+      id: "level3",
+      num: 3,
+      name: "запрет",
+      task: "Система активна, если датчик A НЕ активен.",
+      targetExpr: "F = ¬A",
+      inputs: ["A"],
+      outputs: ["F"],
+      func: function (v) { return v.A ? 0 : 1; }
+    },
+    {
+      id: "level4",
+      num: 4,
+      name: "доступ с ограничением",
+      task: "A должен быть активен, а B — выключен.",
+      targetExpr: "F = A ∧ ¬B",
+      inputs: ["A", "B"],
+      outputs: ["F"],
+      func: function (v) { return v.A & (v.B ? 0 : 1); }
+    },
+    {
+      id: "level5",
+      num: 5,
+      name: "аварийный режим",
+      task: "Доступ разрешён, если A активен или аварийный сигнал C включён, но B выключен.",
+      targetExpr: "F = (A ∨ C) ∧ ¬B",
+      inputs: ["A", "B", "C"],
+      outputs: ["F"],
+      func: function (v) { return (v.A | v.C) & (v.B ? 0 : 1); }
+    },
+    {
+      id: "level6",
+      num: 6,
+      name: "инвертированная безопасность",
+      task: "Система блокируется только если оба датчика A и B активны одновременно.",
+      targetExpr: "F = ¬(A ∧ B)",
+      inputs: ["A", "B"],
+      outputs: ["F"],
+      func: function (v) { return (v.A & v.B) ? 0 : 1; }
+    },
+    {
+      id: "level7",
+      num: 7,
+      name: "тихая зона",
+      task: "Система активна только если ни один датчик не подаёт сигнал.",
+      targetExpr: "F = ¬(A ∨ B)",
+      inputs: ["A", "B"],
+      outputs: ["F"],
+      func: function (v) { return (v.A | v.B) ? 0 : 1; }
+    },
+    {
+      id: "level8",
+      num: 8,
+      name: "ровно один",
+      task: "Система активна, если активен ровно один из датчиков A или B.",
+      targetExpr: "F = A ⊕ B",
+      inputs: ["A", "B"],
+      outputs: ["F"],
+      func: function (v) { return v.A ^ v.B; }
+    },
+    {
+      id: "level9",
+      num: 9,
+      name: "контроль несоответствия",
+      task: "A и B должны различаться, но только если C выключен.",
+      targetExpr: "F = (A ⊕ B) ∧ ¬C",
+      inputs: ["A", "B", "C"],
+      outputs: ["F"],
+      func: function (v) { return (v.A ^ v.B) & (v.C ? 0 : 1); }
+    },
+    {
+      id: "level10",
+      num: 10,
+      name: "двухфакторная защита",
+      task: "Система срабатывает, если A и B активны, либо если включён аварийный канал C.",
+      targetExpr: "F = (A ∧ B) ∨ C",
+      inputs: ["A", "B", "C"],
+      outputs: ["F"],
+      func: function (v) { return (v.A & v.B) | v.C; }
+    },
+    {
+      id: "level11",
+      num: 11,
+      name: "отказоустойчивость",
+      task: "Доступ разрешён, если A и B активны, либо если аварийный канал C выключен.",
+      targetExpr: "F = (A ∧ B) ∨ ¬C",
+      inputs: ["A", "B", "C"],
+      outputs: ["F"],
+      func: function (v) { return (v.A & v.B) | (v.C ? 0 : 1); }
+    },
+    {
+      id: "level12",
+      num: 12,
+      name: "паранойя",
+      task: "A и B должны совпадать, либо C активен. Если D активен — доступ запрещён всегда.",
+      targetExpr: "F = (¬(A ⊕ B) ∨ C) ∧ ¬D",
+      inputs: ["A", "B", "C", "D"],
+      outputs: ["F"],
+      func: function (v) { return ((!(v.A ^ v.B) ? 1 : 0) | v.C) & (v.D ? 0 : 1); }
+    }
+  ];
 
-  {
-    id: "level6",
-    num: 6,
-    name: "инвертированная безопасность",
-    task: "Система блокируется только если оба датчика A и B активны одновременно.",
-    targetExpr: "F = ¬(A ∧ B)",
-    inputs: ["A", "B"],
-    outputs: ["F"],
-    func: v => (v.A & v.B) ? 0 : 1
-  },
-  {
-    id: "level7",
-    num: 7,
-    name: "тихая зона",
-    task: "Система активна только если ни один датчик не подаёт сигнал.",
-    targetExpr: "F = ¬(A ∨ B)",
-    inputs: ["A", "B"],
-    outputs: ["F"],
-    func: v => (v.A | v.B) ? 0 : 1
-  },
-
-  {
-    id: "level8",
-    num: 8,
-    name: "ровно один",
-    task: "Система активна, если активен ровно один из датчиков A или B.",
-    targetExpr: "F = A ⊕ B",
-    inputs: ["A", "B"],
-    outputs: ["F"],
-    func: v => v.A ^ v.B
-  },
-  {
-    id: "level9",
-    num: 9,
-    name: "контроль несоответствия",
-    task: "A и B должны различаться, но только если C выключен.",
-    targetExpr: "F = (A ⊕ B) ∧ ¬C",
-    inputs: ["A", "B", "C"],
-    outputs: ["F"],
-    func: v => (v.A ^ v.B) & (v.C ? 0 : 1)
-  },
-
-  {
-    id: "level10",
-    num: 10,
-    name: "двухфакторная защита",
-    task: "Система срабатывает, если A и B активны, либо если включён аварийный канал C.",
-    targetExpr: "F = (A ∧ B) ∨ C",
-    inputs: ["A", "B", "C"],
-    outputs: ["F"],
-    func: v => (v.A & v.B) | v.C
-  },
-  {
-    id: "level11",
-    num: 11,
-    name: "отказоустойчивость",
-    task: "Доступ разрешён, если A и B активны, либо если аварийный канал C выключен.",
-    targetExpr: "F = (A ∧ B) ∨ ¬C",
-    inputs: ["A", "B", "C"],
-    outputs: ["F"],
-    func: v => (v.A & v.B) | (v.C ? 0 : 1)
-  },
-  {
-    id: "level12",
-    num: 12,
-    name: "паранойя",
-    task: "A и B должны совпадать, либо C активен. Если D активен — доступ запрещён всегда.",
-    targetExpr: "F = (¬(A ⊕ B) ∨ C) ∧ ¬D",
-    inputs: ["A", "B", "C", "D"],
-    outputs: ["F"],
-    func: v => ((!(v.A ^ v.B) ? 1 : 0) | v.C) & (v.D ? 0 : 1)
-  }
-];
-
-  // ====== DOM ======
   var levelsList, levelTitle, levelTarget, levelTask, hintBtn;
   var board, workspace, dropHint, srcPortsEl, outPortsEl, wiresSvg;
   var waveExpected, waveActual;
@@ -158,42 +153,38 @@ var LEVELS = [
   var truthModal, truthBody;
   var restartBtn;
 
-  // ====== CONSTANTS (layout) ======
-  // Узкие блоки, как ты просила: гейты = ширина ист/вых.
   var NODE_H = 140;
-  var FIXED_W = 86;  // ист/вых: поуже (примерно 1.7x относительно старого вида)
-  var GATE_W = 86;   // логические блоки тоже такие же по ширине
+  var FIXED_W = 86;
+  var GATE_W = 86;
   var BOARD_PAD_LR = 110;
   var GATE_GAP = 12;
 
-  // ====== STATE ======
   var state = {
     level: LEVELS[0],
 
-    nodes: [],   // gate nodes only
-    wires: [],   // {id, from:{nodeId,port}, to:{nodeId,port}}
+    nodes: [],
+    wires: [],
     nextId: 1,
     nextWireId: 1,
 
-    // connecting
     connecting: null,
     tempPath: null,
+    wireCommitted: false,
 
-    // DnD fix: keep current gate type here
+    dragGhost: null,
     dragGateType: null,
+    dragPointerId: null,
+    dragSourceEl: null,
 
-    // floors line (2 этажа)
     floorsLine: null,
 
-    // level timer (starts when first gate appears)
     levelStartedAt: null,
     levelTimerInt: null,
 
-    // sim
     sim: {
       running: false,
       paused: false,
-      startedAt: null, // simulation start moment (not the level timer)
+      startedAt: null,
       timerInt: null,
       stepInt: null,
       stepMs: 450,
@@ -254,7 +245,6 @@ var LEVELS = [
     });
   }
 
-  // ====== FLOORS LINE ======
   function ensureFloorsLine() {
     var line = board.querySelector(".trainer-v2__floors");
     if (!line) {
@@ -271,17 +261,15 @@ var LEVELS = [
     state.floorsLine.hidden = !show;
   }
 
-  // ====== RESTART BUTTON (auto) ======
   function ensureRestartButton() {
     restartBtn = document.getElementById("restartBtn");
     if (restartBtn) return;
 
-    // Вставляем кнопку “Начать заново” рядом с play/pause/stop, если контейнер есть
-    var controlsTop = board.closest(".trainer-v2") ?
-      document.querySelector(".trainer-v2__controls-top") : null;
+    var controlsTop = board.closest(".trainer-v2")
+      ? document.querySelector(".trainer-v2__controls-top")
+      : null;
 
     if (!controlsTop) {
-      // fallback: добавим рядом с playBtn
       controlsTop = playBtn && playBtn.parentNode ? playBtn.parentNode : null;
     }
 
@@ -294,7 +282,6 @@ var LEVELS = [
     restartBtn.title = "Начать заново";
     restartBtn.innerHTML = "⟲";
 
-    // вставим первым (до play)
     if (controlsTop.firstChild) controlsTop.insertBefore(restartBtn, controlsTop.firstChild);
     else controlsTop.appendChild(restartBtn);
 
@@ -304,7 +291,6 @@ var LEVELS = [
   }
 
   function restartLevel() {
-    // Сбрасываем схему + таймер уровня + симуляцию
     stopSimulation(true);
     stopLevelTimer(true);
     resetCircuit();
@@ -314,7 +300,6 @@ var LEVELS = [
     timeLine.textContent = "Время: 00:00";
   }
 
-  // ====== LEVEL TIMER ======
   function startLevelTimerIfNeeded() {
     if (state.levelStartedAt != null) return;
     state.levelStartedAt = Date.now();
@@ -328,7 +313,10 @@ var LEVELS = [
   }
 
   function stopLevelTimer(hardReset) {
-    if (state.levelTimerInt) { clearInterval(state.levelTimerInt); state.levelTimerInt = null; }
+    if (state.levelTimerInt) {
+      clearInterval(state.levelTimerInt);
+      state.levelTimerInt = null;
+    }
     if (hardReset) state.levelStartedAt = null;
   }
 
@@ -337,7 +325,6 @@ var LEVELS = [
     return Date.now() - state.levelStartedAt;
   }
 
-  // ====== LEVELS UI ======
   function renderLevels() {
     levelsList.innerHTML = "";
 
@@ -348,19 +335,18 @@ var LEVELS = [
 
       var title = (lvl.num != null ? (lvl.num + " — " + lvl.name) : lvl.name);
 
-      // ВАЖНО: в списке уровней не светим целевую функцию. Только задача.
       li.innerHTML =
         '<div>' +
           '<div class="trainer-v2__level-title">' + escapeHtml(title) + '</div>' +
           '<div class="trainer-v2__level-meta">' +
-  '<div class="trainer-v2__level-mini">Входов: ' + lvl.inputs.length +
-  ' • Итераций: ' + Math.pow(2, lvl.inputs.length) + '</div>' +
-          '</div>' +
-        '</div>' +
+            '<div class="trainer-v2__level-mini">Входов: ' + lvl.inputs.length +
+            " • Итераций: " + Math.pow(2, lvl.inputs.length) + "</div>" +
+          "</div>" +
+        "</div>" +
         '<div class="trainer-v2__level-right">' +
           '<div class="trainer-v2__level-status" data-status="pending">Не пройден</div>' +
           '<div class="trainer-v2__level-best" data-best="' + lvl.id + '">Лучшее время: —</div>' +
-        '</div>';
+        "</div>";
 
       li.addEventListener("click", function () {
         selectLevel(lvl.id);
@@ -395,8 +381,6 @@ var LEVELS = [
     resetCircuit();
     renderFixedPorts();
     resetSimulationUI();
-
-    // диаграмма должна быть видна сразу
     primeExpectedWave();
 
     hintBtn.onclick = function () {
@@ -431,14 +415,12 @@ var LEVELS = [
     });
   }
 
-  // ====== RESET ======
   function resetCircuit() {
     state.nodes = [];
     state.wires = [];
     state.nextId = 1;
     state.nextWireId = 1;
 
-    // clear gate nodes only
     while (workspace.firstChild) workspace.removeChild(workspace.firstChild);
     workspace.appendChild(dropHint);
 
@@ -449,132 +431,124 @@ var LEVELS = [
     redrawAll();
   }
 
-  // ====== PALETTE DND ======
   function bindPaletteDnD() {
     var chips = document.querySelectorAll(".trainer-v2__chip");
-    Array.prototype.forEach.call(chips, function (btn) {
-      btn.addEventListener("dragstart", function (e) {
-        var type = btn.getAttribute("data-gate") || "";
-        state.dragGateType = type;
-        e.dataTransfer.effectAllowed = "copy";
-        try { e.dataTransfer.setData("text/plain", type); } catch (_) {}
-      });
+    Array.prototype.forEach.call(chips, function (chip) {
+      chip.style.touchAction = "none";
 
-      btn.addEventListener("dragend", function () {
-        state.dragGateType = null;
-        board.classList.remove("trainer-v2__board--drag");
+      chip.addEventListener("pointerdown", function (e) {
+        if (state.sim.running) return;
+
+        e.preventDefault();
+
+        state.dragGateType = chip.getAttribute("data-gate");
+        state.dragPointerId = e.pointerId;
+        state.dragSourceEl = chip;
+
+        try { chip.setPointerCapture(e.pointerId); } catch (err) {}
+
+        var ghost = chip.cloneNode(true);
+        ghost.style.position = "fixed";
+        ghost.style.left = e.clientX + "px";
+        ghost.style.top = e.clientY + "px";
+        ghost.style.pointerEvents = "none";
+        ghost.style.opacity = "0.85";
+        ghost.style.zIndex = "9999";
+        ghost.style.transform = "translate(-50%, -50%)";
+
+        document.body.appendChild(ghost);
+        state.dragGhost = ghost;
+
+        board.classList.add("trainer-v2__board--drag");
       });
     });
   }
 
-  // ====== BOARD DND ======
   function bindBoardDnD() {
-  workspace.addEventListener("dragover", function (e) {
-    if (!state.dragGateType) return;
-    e.preventDefault();
-    board.classList.add("trainer-v2__board--drag");
-  });
-
-  workspace.addEventListener("dragleave", function () {
-    board.classList.remove("trainer-v2__board--drag");
-  });
-
-  workspace.addEventListener("drop", function (e) {
-    var type = state.dragGateType;
-    if (!type) return;
-
-    e.preventDefault();
-    board.classList.remove("trainer-v2__board--drag");
-    state.dragGateType = null;
-
-    var rect = board.getBoundingClientRect();
-    addGateNode(type, e.clientX - rect.left, e.clientY - rect.top);
-  });
+    workspace.addEventListener("pointerdown", function () {
+      if (!state.dragGateType) return;
+    });
   }
 
   function boardLinesY() {
-  var boardRect = board.getBoundingClientRect();
+    var boardRect = board.getBoundingClientRect();
 
-  var srcNode = board.querySelector(".node--src");
-  var outNode = board.querySelector(".node--out");
+    var srcNode = board.querySelector(".node--src");
+    var outNode = board.querySelector(".node--out");
 
-  // fallback, если вдруг DOM еще не готов
-  if (!srcNode || !outNode) {
-    var h = board.clientHeight;
+    if (!srcNode || !outNode) {
+      var h = board.clientHeight;
+      return {
+        top: Math.round(h * 0.25 - NODE_H / 2),
+        bottom: Math.round(h * 0.75 - NODE_H / 2)
+      };
+    }
+
+    var srcRect = srcNode.getBoundingClientRect();
+    var outRect = outNode.getBoundingClientRect();
+
     return {
-      top: Math.round(h * 0.25 - NODE_H / 2),
-      bottom: Math.round(h * 0.75 - NODE_H / 2)
+      top: Math.round((srcRect.top - boardRect.top) + srcRect.height / 2 - NODE_H / 2),
+      bottom: Math.round((outRect.top - boardRect.top) + outRect.height / 2 - NODE_H / 2)
     };
   }
 
-  var srcRect = srcNode.getBoundingClientRect();
-  var outRect = outNode.getBoundingClientRect();
-
-  return {
-    top: Math.round((srcRect.top - boardRect.top) + srcRect.height / 2 - NODE_H / 2),
-    bottom: Math.round((outRect.top - boardRect.top) + outRect.height / 2 - NODE_H / 2)
-  };
-}
-
-  
   function addGateNode(type, x, y) {
-  if (!GATE_IMPL[type]) return;
-  if (state.sim.running) return;
+    if (!GATE_IMPL[type]) return;
+    if (state.sim.running) return;
 
-  startLevelTimerIfNeeded();
+    startLevelTimerIfNeeded();
 
-  const lines = boardLinesY();
+    var lines = boardLinesY();
 
-  // определяем этаж по Y мыши
-  const floorY = Math.abs(y - lines.top) < Math.abs(y - lines.bottom)
-    ? lines.top
-    : lines.bottom;
+    var floorY = Math.abs(y - lines.top) < Math.abs(y - lines.bottom)
+      ? lines.top
+      : lines.bottom;
 
-  const node = {
-    id: "G" + (state.nextId++),
-    kind: "gate",
-    type: type,
-    x: clamp(x - GATE_W / 2, BOARD_PAD_LR, board.clientWidth - BOARD_PAD_LR - GATE_W),
-    y: floorY,
-    ins: gateInCount(type),
-    outs: 1
-  };
+    var node = {
+      id: "G" + (state.nextId++),
+      kind: "gate",
+      type: type,
+      x: clamp(x - GATE_W / 2, BOARD_PAD_LR, board.clientWidth - BOARD_PAD_LR - GATE_W),
+      y: floorY,
+      ins: gateInCount(type),
+      outs: 1
+    };
 
-  resolveGateCollision(node);
-  state.nodes.push(node);
+    resolveGateCollision(node);
+    state.nodes.push(node);
 
-  renderGateNode(node);
+    renderGateNode(node);
 
-  dropHint.hidden = true;
-  showFloorsLine(true);
-  redrawAll();
-}
+    dropHint.hidden = true;
+    showFloorsLine(true);
+    redrawAll();
+  }
 
   function resolveGateCollision(node) {
-  const padding = 12;
-  let moved = true;
+    var padding = 12;
+    var moved = true;
 
-  while (moved) {
-    moved = false;
-    for (const other of state.nodes) {
-      if (other === node) continue;
-      if (other.y !== node.y) continue;
+    while (moved) {
+      moved = false;
+      for (var i = 0; i < state.nodes.length; i++) {
+        var other = state.nodes[i];
+        if (other === node) continue;
+        if (other.y !== node.y) continue;
 
-      const overlap =
-        node.x < other.x + GATE_W + padding &&
-        node.x + GATE_W + padding > other.x;
+        var overlap =
+          node.x < other.x + GATE_W + padding &&
+          node.x + GATE_W + padding > other.x;
 
-      if (overlap) {
-        node.x = other.x + GATE_W + padding;
-        moved = true;
+        if (overlap) {
+          node.x = other.x + GATE_W + padding;
+          moved = true;
+        }
       }
     }
   }
-}
-
 
   function renderGateNode(node) {
-    // Если уже отрендерен — не плодим
     var old = workspace.querySelector('[data-node="' + cssEscape(node.id) + '"]');
     if (old) return;
 
@@ -593,12 +567,12 @@ var LEVELS = [
 
     var ins = document.createElement("div");
     ins.className = "node__side node__side--in";
+    ins.setAttribute("data-count", node.ins);
 
     for (var i = 0; i < node.ins; i++) {
       ins.appendChild(makePortEl({ nodeId: node.id, port: i, io: "in", label: "", isGateOut: false }));
     }
 
-    // Выход снизу, выделенный, с буквой “В”
     var outBottom = document.createElement("div");
     outBottom.className = "node__out-bottom";
     outBottom.appendChild(makePortEl({
@@ -639,14 +613,11 @@ var LEVELS = [
     if (!state.nodes.length) {
       dropHint.hidden = false;
       showFloorsLine(false);
-      // ВАЖНО: таймер не сбрасываем. Он продолжает идти, как ты просила.
-    } else {
     }
 
     redrawAll();
   }
 
-  // ====== PORTS / WIRES ======
   function makePortEl(cfg) {
     var wrap = document.createElement("div");
     wrap.className = "port";
@@ -671,71 +642,64 @@ var LEVELS = [
       wrap.appendChild(lab);
     }
 
-    // ВАЖНО: старт соединения должен работать со ВСЕХ out-портов (и ист, и гейт)
-    // Раньше у тебя это было только на dot и местами “не ловилось”.
     dot.addEventListener("pointerdown", function (e) {
-  if (state.sim.running) return;
-
-  e.preventDefault();
-  e.stopPropagation();
-
-  // 1) Обычное соединение: тянем ИЗ out-порта
-  if (cfg.io === "out") {
-    state.connecting = {
-      fromEl: dot,
-      from: { nodeId: cfg.nodeId, port: cfg.port }
-    };
-    ensureTempPath();
-    return;
-  }
-
-  // 2) "Удаление/перетаскивание конца": тянем ИЗ того, кто был подключен к этому IN
-  //    Если к этому входу уже приходит провод — выдергиваем его и начинаем перетаскивание.
-  if (cfg.io === "in") {
-    var toNode = cfg.nodeId;
-    var toPort = cfg.port;
-
-    var idx = -1;
-    for (var i = 0; i < state.wires.length; i++) {
-      var w = state.wires[i];
-      if (w.to.nodeId === toNode && w.to.port === toPort) { idx = i; break; }
-    }
-    if (idx === -1) return; // нечего удалять/перетаскивать
-
-    var oldWire = state.wires[idx];
-    // удаляем провод сразу (если отпустишь в пустоте — он уже удалён)
-    state.wires.splice(idx, 1);
-
-    // начинаем тянуть новый "конец" от старого источника
-    state.connecting = {
-      fromEl: findPortDot(oldWire.from.nodeId, "out", oldWire.from.port),
-      from: { nodeId: oldWire.from.nodeId, port: oldWire.from.port }
-    };
-
-    ensureTempPath();
-    redrawAll();
-  }
-});
-
-
-
-    wrap.addEventListener("pointerup", function (e) {
-      if (!state.connecting) return;
       if (state.sim.running) return;
 
       e.preventDefault();
       e.stopPropagation();
 
-      var io = wrap.getAttribute("data-io");
-      if (io !== "in") {
-        cancelTempWire();
+      if (cfg.io === "out") {
+        state.wireCommitted = false;
+        try { dot.setPointerCapture(e.pointerId); } catch (err) {}
+
+        state.connecting = {
+          fromEl: dot,
+          from: { nodeId: cfg.nodeId, port: cfg.port }
+        };
+
+        ensureTempPath();
         return;
       }
 
-      var toNode = wrap.getAttribute("data-node");
-      var toPort = parseInt(wrap.getAttribute("data-port"), 10) || 0;
+      if (cfg.io === "in") {
+        var toNode = cfg.nodeId;
+        var toPort = cfg.port;
 
-      tryConnect(state.connecting.from, { nodeId: toNode, port: toPort });
+        var idx = -1;
+        for (var i = 0; i < state.wires.length; i++) {
+          var w = state.wires[i];
+          if (w.to.nodeId === toNode && w.to.port === toPort) { idx = i; break; }
+        }
+        if (idx === -1) return;
+
+        var oldWire = state.wires[idx];
+        state.wires.splice(idx, 1);
+
+        state.wireCommitted = false;
+        state.connecting = {
+          fromEl: findPortDot(oldWire.from.nodeId, "out", oldWire.from.port),
+          from: { nodeId: oldWire.from.nodeId, port: oldWire.from.port }
+        };
+
+        ensureTempPath();
+        redrawAll();
+      }
+    });
+
+    wrap.addEventListener("pointerup", function (e) {
+      if (!state.connecting) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (wrap.getAttribute("data-io") === "in") {
+        tryConnect(state.connecting.from, {
+          nodeId: wrap.getAttribute("data-node"),
+          port: parseInt(wrap.getAttribute("data-port"), 10) || 0
+        });
+        state.wireCommitted = true;
+      }
+
       cancelTempWire();
       redrawAll();
     });
@@ -747,7 +711,6 @@ var LEVELS = [
     if (!from || !to) return;
     if (to.nodeId === from.nodeId) return;
 
-    // вход может иметь только 1 провод
     state.wires = state.wires.filter(function (w) {
       return !(w.to.nodeId === to.nodeId && w.to.port === to.port);
     });
@@ -761,28 +724,77 @@ var LEVELS = [
 
   function bindGlobalPointerForWires() {
     window.addEventListener("pointermove", function (e) {
-      if (!state.connecting) return;
-      redrawTempWire(e.clientX, e.clientY);
+      if (state.dragGhost) {
+        state.dragGhost.style.left = e.clientX + "px";
+        state.dragGhost.style.top = e.clientY + "px";
+
+        var rect = board.getBoundingClientRect();
+        var inside =
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom;
+
+        board.classList.toggle("trainer-v2__board--drag", inside);
+      }
+
+      if (state.connecting) {
+        redrawTempWire(e.clientX, e.clientY);
+      }
     });
 
     window.addEventListener("pointerup", function (e) {
-  if (!state.connecting) return;
+      if (state.dragGhost && state.dragGateType) {
+        var rect = board.getBoundingClientRect();
 
-  var el = e.target;
+        if (
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
+        ) {
+          addGateNode(
+            state.dragGateType,
+            e.clientX - rect.left,
+            e.clientY - rect.top
+          );
+        }
 
-  // если отпустили НЕ на входном порте — считаем это удалением
-  if (
-    !el ||
-    !el.closest ||
-    !el.closest('.port[data-io="in"]')
-  ) {
-    cancelTempWire();
-    return;
-  }
+        try {
+          if (state.dragSourceEl && state.dragPointerId != null) {
+            state.dragSourceEl.releasePointerCapture(state.dragPointerId);
+          }
+        } catch (err) {}
 
-  // если на входе — соединение уже обработано в makePortEl
-});
+        state.dragGhost.remove();
+        state.dragGhost = null;
+        state.dragGateType = null;
+        state.dragPointerId = null;
+        state.dragSourceEl = null;
 
+        board.classList.remove("trainer-v2__board--drag");
+      }
+
+      if (state.connecting && !state.wireCommitted) {
+        cancelTempWire();
+      }
+
+      state.wireCommitted = false;
+    });
+
+    window.addEventListener("pointercancel", function () {
+      if (state.dragGhost) {
+        state.dragGhost.remove();
+        state.dragGhost = null;
+      }
+      state.dragGateType = null;
+      state.dragPointerId = null;
+      state.dragSourceEl = null;
+      board.classList.remove("trainer-v2__board--drag");
+
+      if (state.connecting) cancelTempWire();
+      state.wireCommitted = false;
+    });
   }
 
   function ensureTempPath() {
@@ -841,7 +853,6 @@ var LEVELS = [
       path.setAttribute("data-wire-id", w.id);
       path.setAttribute("d", bezier(a.x, a.y, b.x, b.y));
 
-      // dblclick удаляет провод (мы включили pointer-events в CSS для path)
       path.addEventListener("dblclick", function () {
         if (state.sim.running) return;
         var id = path.getAttribute("data-wire-id");
@@ -883,7 +894,6 @@ var LEVELS = [
     return "M " + x1 + " " + y1 + " C " + c1x + " " + c1y + ", " + c2x + " " + c2y + ", " + x2 + " " + y2;
   }
 
-  // ====== SIMULATION ======
   function bindControls() {
     playBtn.addEventListener("click", function () {
       if (state.sim.running && state.sim.paused) {
@@ -908,10 +918,6 @@ var LEVELS = [
       if (!state.sim.finished) return;
       openTruthModal();
     });
-
-    if (restartBtn) {
-      // уже повешено в ensureRestartButton
-    }
   }
 
   function resetSimulationUI() {
@@ -947,7 +953,6 @@ var LEVELS = [
   }
 
   function startSimulation() {
-    // Нельзя “пройти” уровень вообще без логических блоков.
     if (!state.nodes.length) {
       resultLine.textContent = "Результат: ошибка (добавь хотя бы один логический блок)";
       return;
@@ -974,7 +979,6 @@ var LEVELS = [
     if (state.sim.timerInt) clearInterval(state.sim.timerInt);
     state.sim.timerInt = setInterval(function () {
       if (!state.sim.running || state.sim.paused) return;
-      // Во время симуляции показываем ТАЙМЕР УРОВНЯ, а не симуляции.
       var ms = getLevelElapsedMs();
       timeLine.textContent = "Время: " + fmtTime(ms);
     }, 200);
@@ -1034,11 +1038,9 @@ var LEVELS = [
     var row = state.sim.iterations[i];
     var actual = evaluateCircuit(row.inputs);
 
-row.actual = actual.valid ? actual.value : 0;
-row.ok = actual.valid ? (row.actual === row.expected) : false;
-
-row.values = actual.values || {};
-
+    row.actual = actual.valid ? actual.value : 0;
+    row.ok = actual.valid ? (row.actual === row.expected) : false;
+    row.values = actual.values || {};
 
     state.sim.iterIndex++;
     redrawWave();
@@ -1075,7 +1077,6 @@ row.values = actual.values || {};
     return state.wires.some(function (w) { return w.to.nodeId === "out"; });
   }
 
-  // ====== CIRCUIT EVAL ======
   function evaluateCircuit(inputMap) {
     var inMap = {};
     state.wires.forEach(function (w) {
@@ -1136,14 +1137,12 @@ row.values = actual.values || {};
     return { valid: true, value: outVal, values: values };
   }
 
-  // ====== WAVES DRAW ======
   function redrawWave() {
     var it = state.sim.iterations || [];
 
     var exp = it.map(function (r) { return r.expected; });
     var act = it.map(function (r) { return r.actual; });
 
-    // expected — показываем полностью всегда
     var expActive = (state.sim.running || state.sim.finished) ? state.sim.iterIndex : exp.length;
     var actActive = state.sim.iterIndex;
 
@@ -1151,7 +1150,6 @@ row.values = actual.values || {};
     drawWaveSvg(waveActual, act, actActive, it, "actual");
   }
 
-  // Убрали “0/1” справа/слева — вместо этого рисуем точки-вершины с подсказкой inputs.
   function drawWaveSvg(svg, arr, activeCount, iterations, mode) {
     svg.innerHTML = "";
     var w = svg.clientWidth || 600;
@@ -1196,28 +1194,25 @@ row.values = actual.values || {};
     path.setAttribute("class", "wave");
     svg.appendChild(path);
 
-    // точки-вершины
     for (var k = 0; k < n; k++) {
       var vx = (k + 0.5) * step;
       var vv = arr[k] ? 1 : 0;
       var vy = vv ? y1 : y0;
 
       var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-c.setAttribute("cx", String(vx));
-c.setAttribute("cy", String(vy));
-c.setAttribute("r", "6");
-c.setAttribute("class", "wave__pt");
+      c.setAttribute("cx", String(vx));
+      c.setAttribute("cy", String(vy));
+      c.setAttribute("r", "6");
+      c.setAttribute("class", "wave__pt");
 
-var tip = iterationLabel(iterations, k);
-if (tip) {
-  // Нормальный tooltip для SVG
-  var t = document.createElementNS("http://www.w3.org/2000/svg", "title");
-  t.textContent = tip;
-  c.appendChild(t);
-}
+      var tip = iterationLabel(iterations, k);
+      if (tip) {
+        var t = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        t.textContent = tip;
+        c.appendChild(t);
+      }
 
-svg.appendChild(c);
-
+      svg.appendChild(c);
     }
 
     var done = Math.max(0, Math.min(activeCount, n));
@@ -1234,11 +1229,10 @@ svg.appendChild(c);
     if (!iterations || !iterations[idx] || !iterations[idx].inputs) return "";
     var inputs = iterations[idx].inputs;
     var keys = Object.keys(inputs);
-    keys.sort(); // стабильный порядок
+    keys.sort();
     return keys.map(function (k) { return k + "=" + (inputs[k] ? 1 : 0); }).join(" ");
   }
 
-  // ====== TRUTH MODAL ======
   function bindModal() {
     truthModal.addEventListener("click", function (e) {
       var t = e.target;
@@ -1267,11 +1261,11 @@ svg.appendChild(c);
     });
 
     state.nodes.forEach(function (n) {
-  var th = document.createElement("th");
-  th.textContent = GATE_LABELS[n.type] || n.type;
-  th.className = "truthv2__gate";
-  trh.appendChild(th);
-});
+      var th = document.createElement("th");
+      th.textContent = GATE_LABELS[n.type] || n.type;
+      th.className = "truthv2__gate";
+      trh.appendChild(th);
+    });
 
     var thE = document.createElement("th");
     thE.textContent = "ожид.";
@@ -1297,15 +1291,14 @@ svg.appendChild(c);
       });
 
       state.nodes.forEach(function (n) {
-  var td = document.createElement("td");
-  td.textContent =
-    row.values && row.values[n.id] !== undefined
-      ? row.values[n.id]
-      : "—";
-  td.className = "truthv2__gate";
-  tr.appendChild(td);
-});
-
+        var td = document.createElement("td");
+        td.textContent =
+          row.values && row.values[n.id] !== undefined
+            ? row.values[n.id]
+            : "—";
+        td.className = "truthv2__gate";
+        tr.appendChild(td);
+      });
 
       var tdE = document.createElement("td");
       tdE.textContent = String(row.expected);
@@ -1327,7 +1320,6 @@ svg.appendChild(c);
     truthModal.hidden = true;
   }
 
-  // ====== PROGRESS / BEST TIME ======
   var STATS_KEY = "bat_trainer_stats_v2";
 
   function loadStats() {
@@ -1336,7 +1328,9 @@ svg.appendChild(c);
       if (!raw) return {};
       var p = JSON.parse(raw);
       return p && typeof p === "object" ? p : {};
-    } catch (e) { return {}; }
+    } catch (e) {
+      return {};
+    }
   }
 
   function saveStats(stats) {
@@ -1356,7 +1350,7 @@ svg.appendChild(c);
 
   function updateBestTimesUI() {
     var stats = loadStats();
-    var bestEls = document.querySelectorAll('[data-best]');
+    var bestEls = document.querySelectorAll("[data-best]");
     Array.prototype.forEach.call(bestEls, function (el) {
       var id = el.getAttribute("data-best");
       var s = stats[id];
@@ -1382,7 +1376,6 @@ svg.appendChild(c);
     }
   }
 
-  // ====== UTIL ======
   function fmtTime(ms) {
     var s = Math.floor(ms / 1000);
     var m = Math.floor(s / 60);
@@ -1403,7 +1396,6 @@ svg.appendChild(c);
       .replace(/'/g, "&#039;");
   }
 
-  // нормальный cssEscape, чтобы селекторы не ломались
   function cssEscape(s) {
     s = String(s);
     if (window.CSS && typeof window.CSS.escape === "function") return window.CSS.escape(s);
@@ -1411,5 +1403,4 @@ svg.appendChild(c);
       return "\\" + ch;
     });
   }
-  
 })();

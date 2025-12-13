@@ -501,700 +501,6 @@ html:not(.page--light) .hero--index::after {
 }
 
 /* =========================
-   СТАРЫЙ ПРОСТОЙ ТРЕНАЖЁР
-   ========================= */
-
-.trainer {
-    display: grid;
-    grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.7fr);
-    gap: 24px;
-}
-
-.trainer__expression {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-
-.trainer__expression-label {
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.trainer__expression-value {
-    font-family: "JetBrains Mono", Consolas, Monaco, monospace;
-    font-size: 18px;
-}
-
-.trainer__controls {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.trainer__row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.field--full {
-    width: 100%;
-}
-
-.field__label {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.field__control {
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--bg-secondary);
-    color: var(--text-main);
-    font-size: 13px;
-    outline: none;
-}
-
-/* Базовый стиль для всех контролов в field */
-.field__control input,
-.field__control select {
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--bg-secondary);
-    color: var(--text-main);
-    font-size: 13px;
-    outline: none;
-    appearance: none;
-}
-
-/* hover / focus — одинаково для input и select */
-.field__control input:hover,
-.field__control select:hover,
-.field__control input:focus,
-.field__control select:focus {
-    border-color: var(--accent);
-}
-
-
-.trainer__buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.trainer__feedback {
-    min-height: 20px;
-    font-size: 13px;
-    margin-top: 6px;
-}
-
-.trainer__right {
-    align-self: flex-start;
-}
-
-.trainer__stats-title {
-    font-size: 15px;
-    margin-bottom: 10px;
-}
-
-.stats {
-    margin: 0;
-}
-
-.stats__item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    padding: 4px 0;
-}
-
-.stats__item dt {
-    color: var(--text-muted);
-}
-
-.stats__item dd {
-    margin: 0;
-}
-
-/* =========================
-   НОВЫЙ ТРЕНАЖЁР — ЛЭЙАУТ
-   ========================= */
-
-.section--trainer {
-    min-height: 80vh;
-}
-
-.trainer-shell {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.trainer-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.trainer-layout__left {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.trainer-layout__center {
-    min-width: 0;
-}
-
-/* режимы (уровни / свободный) */
-
-.trainer-modes {
-    display: inline-flex;
-    gap: 6px;
-    padding: 4px;
-    border-radius: 999px;
-    background: rgba(10, 13, 24, 0.8);
-    border: 1px solid var(--border);
-}
-
-.trainer-modes__tab {
-    border: none;
-    background: transparent;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 12px;
-    cursor: pointer;
-    color: var(--text-muted);
-    transition:
-        background var(--transition-fast),
-        color var(--transition-fast);
-}
-
-.trainer-modes__tab--active {
-    background: var(--accent-soft);
-    color: var(--text-main);
-}
-
-/* левая колонка: уровни / легенда */
-
-.trainer-panel {
-    padding: 18px 18px 16px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-}
-
-.trainer-panel__text {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-}
-
-/* список уровней */
-
-.level-list {
-    list-style: none;
-    padding: 0;
-    margin: 12px 0 0;
-    display: grid;
-    gap: 10px;
-}
-
-.level-list__item {
-    padding: 10px 10px 9px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    cursor: pointer;
-    transition:
-        border-color var(--transition-fast),
-        background var(--transition-fast),
-        transform var(--transition-fast),
-        box-shadow var(--transition-fast);
-}
-
-.level-list__item:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-}
-
-.level-list__item--active {
-    border-color: var(--accent);
-}
-
-.level-list__item--done {
-    border-color: #3ecf8e;
-}
-
-.level-list__title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 2px;
-}
-
-.level-list__expr {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-}
-
-.level-list__meta {
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-.level-list__status {
-    margin-top: 4px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-}
-
-.level-list__status[data-status="done"] {
-    color: #3ecf8e;
-}
-
-/* правая / центральная карточка тренажёра */
-
-.trainer-card {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.trainer-card__header {
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-}
-
-.trainer-card__header-main {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.trainer-card__mode {
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-}
-
-.trainer-card__level-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.trainer-card__title {
-    font-family: "Sora", sans-serif;
-    font-size: 16px;
-}
-
-.trainer-hint-btn {
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: transparent;
-    font-size: 11px;
-    padding: 4px 10px;
-    cursor: pointer;
-    color: var(--text-muted);
-    white-space: nowrap;
-    transition:
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        color var(--transition-fast);
-}
-
-.trainer-hint-btn:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--text-main);
-}
-
-.trainer-card__target {
-    margin-top: 4px;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.trainer-card__target--hidden {
-    display: none;
-}
-
-.trainer-card__story {
-    margin-top: 6px;
-    font-size: 13px;
-    line-height: 1.5;
-    border-left: 3px solid var(--accent);
-    padding-left: 10px;
-}
-
-/* двухколоночная сетка внутри основной карточки */
-
-.trainer-main-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
-    gap: 16px;
-    align-items: flex-start;
-}
-
-.trainer-main-grid__left,
-.trainer-main-grid__right {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-/* палитра блоков */
-
-.trainer-palette {
-    border-radius: 12px;
-    border: 1px dashed var(--border);
-    padding: 10px 12px 10px;
-    background: radial-gradient(circle at top left, rgba(124, 92, 255, 0.18), transparent 60%);
-}
-
-.trainer-palette__header {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.trainer-palette__hint {
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-.trainer-palette__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 6px;
-}
-
-.palette-item {
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    padding: 6px 10px;
-    font-size: 11px;
-    cursor: grab;
-    background: var(--bg-card);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    transition:
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        transform var(--transition-fast),
-        box-shadow var(--transition-fast);
-}
-
-.palette-item__title,
-.palette-item__desc {
-    color: var(--text-muted);
-}
-
-.palette-item:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-}
-
-
-/* доска (dropzone) */
-
-.trainer-board {
-    margin-top: 4px;
-}
-
-.trainer-board__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.trainer-board__dropzone {
-    margin-top: 8px;
-    border-radius: 18px;
-    border: 1px dashed var(--border);
-    padding: 12px;
-    min-height: 120px;
-    background: var(--bg-gradient);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.trainer-board__placeholder {
-    font-size: 13px;
-    color: var(--text-muted);
-    text-align: center;
-    padding: 16px 8px;
-    border-radius: 12px;
-    border: 1px dashed rgba(255, 255, 255, 0.08);
-    pointer-events: none;
-}
-
-.trainer-board__dropzone--has-gates .trainer-board__placeholder {
-    display: none;
-}
-
-/* входные параметры */
-
-.trainer-inputs__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.trainer-inputs__row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.trainer-inputs__hint {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 4px;
-}
-
-.trainer-input-item {
-    position: relative;
-    min-width: 120px;
-}
-
-.trainer-input-item__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-}
-
-.trainer-input-item__name {
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.trainer-input-item__controls {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.trainer-input-item__random {
-    font-size: 10px;
-    color: var(--text-muted);
-}
-
-.trainer-input-item__delete {
-    border: none;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 14px;
-    cursor: pointer;
-    padding: 0 2px;
-}
-
-.trainer-input-item__delete:hover {
-    color: var(--accent);
-}
-
-/* блоки-схемы (гейты) */
-
-.trainer-gates__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.trainer-gates__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.gate-slot {
-    position: relative;
-    padding: 10px 10px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background:
-        radial-gradient(circle at top left, rgba(124, 92, 255, 0.25), transparent 55%),
-        #070914;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    transition:
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        transform var(--transition-fast),
-        background var(--transition-fast);
-}
-
-.gate-slot--hover {
-    border-color: var(--accent);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-    transform: translateY(-1px);
-}
-
-.gate-slot__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 6px;
-}
-
-.gate-slot__name {
-    font-family: "Sora", sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.gate-slot__hint {
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-.gate-slot__final-label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 2px;
-}
-
-.gate-slot__final-label input {
-    margin: 0;
-}
-
-.gate-slot__delete {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    border: none;
-    background: transparent;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-size: 14px;
-    padding: 0;
-}
-
-.gate-slot__delete:hover {
-    color: #dc4c46;
-}
-
-/* соединения (бывшие "провода") */
-
-.trainer-wires {
-    margin-top: 4px;
-}
-
-.trainer-wires__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.trainer-wires__item {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(10, 14, 28, 0.9);
-}
-
-.trainer-wires__hint {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 4px;
-}
-
-/* действия / результат / анализ */
-
-.trainer-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.trainer-result__message {
-    min-height: 20px;
-    font-size: 13px;
-    margin-bottom: 8px;
-}
-
-.trainer-result__table {
-    margin-top: 8px;
-    max-height: 260px;
-    overflow: auto;
-}
-
-.trainer-analysis__block {
-    margin-bottom: 10px;
-}
-
-.trainer-analysis__title {
-    font-size: 13px;
-    margin-bottom: 6px;
-}
-
-/* таймер */
-
-.trainer-timer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.trainer-timer__label {
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-/* таблица истинности */
-
-.truth-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 12px;
-}
-
-.truth-table th,
-.truth-table td {
-    border: 1px solid var(--border);
-    padding: 4px 6px;
-    text-align: center;
-}
-
-.truth-table th {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.truth-table__row--mismatch {
-    background: rgba(220, 76, 70, 0.16);
-}
-
-/* =========================
    ТЕОРИЯ / ABOUT
    ========================= */
 
@@ -1348,14 +654,10 @@ html:not(.page--light) .hero--index::after {
    СВЕТЛАЯ ТЕМА (.page--light на <html>)
    ========================= */
 
-/* фон и текст */
-
 .page--light body.page {
     background: radial-gradient(circle at top left, #f3ebff 0, #f6f7ff 40%, #ffffff 100%);
     color: #161827;
 }
-
-/* Шапка / подвал / секции */
 
 .page--light .header {
     background: rgba(245, 246, 251, 0.95);
@@ -1373,15 +675,11 @@ html:not(.page--light) .hero--index::after {
     border-top-color: #d6d8ea;
 }
 
-/* Тоггл темы в светлой */
-
 .page--light .theme-toggle {
     background: #ffffff;
     color: #222222;
     border-color: #aaaaaa;
 }
-
-/* Hero / карточки / теги */
 
 .page--light .hero-card {
     background:
@@ -1404,8 +702,6 @@ html:not(.page--light) .hero--index::after {
     color: #737799;
 }
 
-/* Карточки разделов */
-
 .page--light .card {
     background: rgba(255, 255, 255, 0.98);
     border-color: #d6d8ea;
@@ -1419,8 +715,6 @@ html:not(.page--light) .hero--index::after {
 .page--light .card__text {
     color: #626782;
 }
-
-/* Кнопки в светлой теме */
 
 .page--light .btn--primary {
     background: linear-gradient(135deg, #6a46ff, #8b5dff);
@@ -1442,8 +736,6 @@ html:not(.page--light) .hero--index::after {
     color: #3a2aff;
 }
 
-/* hero главной — светлый фон */
-
 .page--light .hero--index::before {
     background:
         radial-gradient(circle at top left, rgba(124, 92, 255, 0.18), transparent 60%),
@@ -1458,13 +750,9 @@ html:not(.page--light) .hero--index::after {
     opacity: 0.8;
 }
 
-/* Секции с карточками — мягче тени */
-
 .page--light .section--cards .card:hover {
     box-shadow: 0 18px 40px rgba(23, 28, 60, 0.18);
 }
-
-/* Новый тренажёр — светлые фоны */
 
 .page--light .trainer-modes {
     background: rgba(255, 255, 255, 0.9);
@@ -1490,13 +778,9 @@ html:not(.page--light) .hero--index::after {
     background: #f4f4ff;
 }
 
-/* Таблица истинности — светлый заголовок */
-
 .page--light .truth-table th {
     background: #f4f4ff;
 }
-
-/* Палитра блоков — текст всегда читаемый */
 
 .page--light .theme-icon--sun circle,
 .page--light .theme-icon--sun line,
@@ -1507,8 +791,6 @@ html:not(.page--light) .hero--index::after {
 .page--light .theme-icon--sun {
     color: #000;
 }
-
-/* тёмная тема — солнце светлое */
 html:not(.page--light) .theme-icon--sun {
     color: #fff;
 }
@@ -1554,9 +836,7 @@ html:not(.page--light) .theme-icon--sun {
     color: var(--text-main);
 }
 
-/* =========================
-   TRAINER V2 — VARIABLES
-   ========================= */
+/* TRAINER V2 */
 :root {
   --accent: #7C5CFF;
   --accent-soft: rgba(124, 92, 255, 0.14);
@@ -1576,10 +856,8 @@ html:not(.page--light) .theme-icon--sun {
   --bg-card: rgba(0,0,0,0.06);
 }
 
-/* ===== BoolTrainer v2 trainer ===== */
 .trainer-v2 { max-width: 1100px; }
 
-/* tabs */
 .trainer-v2__tabs {
   margin: 18px auto 18px;
   display: flex;
@@ -1600,22 +878,19 @@ html:not(.page--light) .theme-icon--sun {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 22px;
-  align-items: start;
+  align-items: stretch; 
 }
 
-/* left panel */
 .trainer-v2__panel {
   background: rgba(255,255,255,0.10);
   border-radius: 18px;
-  padding: 18px;
+  padding: 18px 18px 0px 18px;
 
-  height: 100%;
-  max-height: calc(100vh - 260px);
+  display: flex;
+  flex-direction: column;
 
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-gutter: stable; /* 🔥 КЛЮЧ */
+  max-height: calc(100vh - 204px);
+  overflow: hidden;
 }
 
 .page--light .trainer-v2__panel { background: rgba(0,0,0,0.06); }
@@ -1634,15 +909,8 @@ html:not(.page--light) .theme-icon--sun {
   font-size: 14px;
 }
 
-
-
-/* levels */
 .trainer-v2__panel {
   scrollbar-width: none;
-}
-.trainer-v2__panel::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 .trainer-v2,
@@ -1653,13 +921,24 @@ html:not(.page--light) .theme-icon--sun {
 body {
   overflow-x: hidden;
 }
+
 .trainer-v2__levels {
   margin: 0;
   padding: 0;
   list-style: none;
 
+  flex: 1;
+  min-height: 0;
+
   overflow-y: auto;
   overflow-x: hidden;
+
+  scrollbar-width: none;
+}
+
+.trainer-v2__levels::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .trainer-v2__level {
@@ -1668,10 +947,11 @@ body {
   padding: 12px;
   background: rgba(0,0,0,0.25);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 140px;
   gap: 12px;
   border: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 10px;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  align-items: start;
 }
 .page--light .trainer-v2__level {
   background: rgba(255,255,255,0.8);
@@ -1684,9 +964,10 @@ body {
 }
 
 .trainer-v2__level-title {
-  font-family: Sora, sans-serif;
-  font-size: 14px;
-  margin-bottom: 6px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .trainer-v2__level-meta {
@@ -1737,12 +1018,15 @@ body {
 }
 .page--light .trainer-v2__level-best { background: rgba(0,0,0,0.04); }
 
-/* right work */
 .trainer-v2__work {
   border-radius: 18px;
   padding: 18px;
   background: rgba(255,255,255,0.10);
+
+  display: flex;
+  flex-direction: column;
 }
+
 .page--light .trainer-v2__work { background: rgba(0,0,0,0.06); }
 
 .trainer-v2__work-head {
@@ -1779,7 +1063,6 @@ body {
 }
 .page--light .trainer-v2__hint { background: rgba(0,0,0,0.08); }
 
-/* palette */
 .trainer-v2__palette {
   margin-top: 12px;
   display: flex;
@@ -1808,8 +1091,12 @@ body {
   opacity: .7;
 }
 
-/* board */
-.trainer-v2__board-wrap { margin-top: 12px; }
+.trainer-v2__board-wrap {
+  margin-top: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 .trainer-v2__board {
   position: relative;
   height: 360px;
@@ -1836,15 +1123,15 @@ body {
 
 
 .trainer-v2__wires path.wire {
-  pointer-events: stroke; /* dblclick по проводу работает */
+  pointer-events: stroke; 
 }
 
 .trainer-v2__workspace {
   position: absolute;
   inset: 0;
+  overflow: hidden;
 }
 
-/* линия “два этажа” */
 .trainer-v2__floors {
   position: absolute;
   left: 110px;
@@ -1856,7 +1143,6 @@ body {
 }
 .page--light .trainer-v2__floors { background: rgba(0,0,0,0.14); }
 
-/* placeholder — строго центр и выше всего, но не мешает портам */
 .trainer-v2__drop-hint {
   position: absolute;
   left: 50%;
@@ -1874,7 +1160,6 @@ body {
 }
 .page--light .trainer-v2__drop-hint { background: rgba(0,0,0,0.06); }
 
-/* nodes */
 .node {
   position: absolute;
   height: 140px;
@@ -1886,7 +1171,6 @@ body {
 }
 .page--light .node { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.10); }
 
-/* ист/вых — поуже */
 .node--fixed {
   position: absolute;
   width: 86px;
@@ -1896,26 +1180,28 @@ body {
   z-index: 3;
 }
 
-/* фиксируем источники ближе к углам, но симметрично */
 .node--src {
   left: 18px;
-  top: 25%;
-  transform: translateY(-50%);
+  top: 18px;
+  transform: none;
 }
 
 .node--out {
   right: 18px;
-  top: 75%;
-  transform: translateY(-50%);
+  bottom: 18px;
+  top: auto;
+  transform: none;
 }
 
-/* drop-hint не перекрывает fixed-блоки */
+.node--src,
+.node--out {
+  max-height: 100%;
+}
+
 .trainer-v2__drop-hint {
-  max-width: calc(100% - 220px); /* учитываем ист + вых */
+  max-width: calc(100% - 220px); 
 }
 
-
-/* логические блоки — тоже узкие (как ист/вых) */
 .node--gate  { width: 86px; }
 
 .node__del {
@@ -1934,11 +1220,11 @@ body {
 
 .node__ports {
   position: absolute;
-  top: 38px;               /* ниже заголовка */
+  top: 50%;
+  transform: translate(-50%, -50%);
   left: 50%;
-  transform: translateX(-50%);
   display: grid;
-  gap: 14px;               /* нормальный отступ между портами */
+  gap: 14px;              
 }
 
 .node__title {
@@ -1949,29 +1235,33 @@ body {
 .node__side {
   display: grid;
   gap: 12px;
-  align-content: center; /* КЛЮЧ */
+  align-content: center; 
   justify-items: center;
   height: 100%;
 }
 .node__side--out { justify-items: end; align-content: start; }
 
 .node__side--in {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
+  flex-direction: column;
   align-items: center;
 }
 
+.node__side--in[data-count="4"],
+.node__side--in[data-count="5"] {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 12px;
+}
 
-/* Выход снизу */
 .node__out-bottom {
   position: absolute;
-  left: 50%;
   bottom: 12px;
+  left: 50%;
   transform: translateX(-50%);
 }
 
-/* ports */
 .port { display: flex; align-items: center; gap: 8px; }
 .port__dot {
   width: 14px;
@@ -2000,7 +1290,6 @@ body {
 
 .port__label { font-size: 12px; opacity: .9; user-select: none; }
 
-/* wires */
 .wire {
   fill: none;
   stroke: rgba(172, 134, 255, 0.95);
@@ -2010,7 +1299,6 @@ body {
 }
 .wire--temp { stroke-dasharray: 6 6; opacity: .9; }
 
-/* bottom */
 .trainer-v2__bottom {
   margin-top: 14px;
   display: grid;
@@ -2019,7 +1307,6 @@ body {
   align-items: stretch;
 }
 
-/* wave box */
 .trainer-v2__wave {
   border-radius: 16px;
   padding: 12px;
@@ -2029,7 +1316,6 @@ body {
 }
 .page--light .trainer-v2__wave { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.10); }
 
-/* УБРАЛИ цифры 0/1 */
 .trainer-v2__wave::before,
 .trainer-v2__wave::after { content: none !important; }
 
@@ -2062,7 +1348,7 @@ body {
 
 .wave__mask {
   fill: rgba(0,0,0,0.35);
-  pointer-events: none; /* КЛЮЧЕВО */
+  pointer-events: none; 
 }
 
 .wave__pt {
@@ -2084,7 +1370,6 @@ body {
   fill: rgba(90, 70, 180, 0.9);
 }
 
-/* controls */
 .trainer-v2__controls {
   border-radius: 16px;
   padding: 12px;
@@ -2114,7 +1399,6 @@ body {
 .trainer-v2__btn--ghost { background: rgba(255,255,255,0.08); }
 .page--light .trainer-v2__btn--ghost { background: rgba(0,0,0,0.06); }
 
-/* “Начать заново” — фиолетовый, чтобы выделить */
 .trainer-v2__btn--restart {
   background: rgba(124, 92, 255, 0.95);
   color: #0b0d14;
@@ -2127,7 +1411,6 @@ body {
 
 .trainer-v2__meta { font-size: 12px; opacity: .85; line-height: 1.45; }
 
-/* Modal / truth */
 .modal { position: fixed; inset: 0; z-index: 200; }
 .modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
 .modal__dialog {
@@ -2184,7 +1467,6 @@ body {
 }
 .truthv2__bad { background: rgba(255, 80, 125, 0.12); }
 
-/* Responsive */
 @media (max-width: 980px) {
   .trainer-v2__layout { grid-template-columns: 1fr; }
   .trainer-v2__bottom { grid-template-columns: 1fr; }
@@ -2193,4 +1475,9 @@ body {
 .truthv2__gate {
   font-weight: 600;
   color: var(--accent);
+}
+.trainer-v2__chip,
+.node,
+.port__dot {
+  touch-action: none;
 }

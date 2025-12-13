@@ -137,7 +137,12 @@
   }
 
   .hero__meta {
-    gap: 6px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-tag {
+    text-align: center;
   }
 
   .hero__preview {
@@ -296,8 +301,11 @@
 }
 @media (max-width: 767px) {
   .header__inner {
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo theme"
+      "nav nav";
     gap: 10px;
   }
 
@@ -308,13 +316,11 @@
   }
 
   .logo {
-    font-size: 16px;
+    grid-area: logo;
   }
 
   .nav {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    grid-area: nav;
   }
 
   .nav__link {
@@ -323,19 +329,34 @@
   }
 
   .theme-toggle {
-    align-self: flex-end;
+    grid-area: theme;
+    justify-self: end;
   }
 }
 @media (max-width: 767px) {
     .hero--index::after {
-        opacity: 0.12;
-        background-position: center bottom;
-        background-size: 60%;
-        transform: none;
-    }
+    opacity: 0.18;
+    background-position: center bottom;
+    background-size: auto 115%;
+  }
 
     .hero--index::before {
         display: none;
     }
+}
+
+@media (max-width: 767px) {
+  .trainer-v2__board-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trainer-v2__controls {
+    order: 2;
+  }
+
+  .trainer-v2__wave {
+    order: 3;
+  }
 }
 
